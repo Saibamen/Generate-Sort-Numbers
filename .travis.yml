@@ -14,3 +14,4 @@ php:
 
 script:
   - php generate < travis-input.txt
+  - -f test.dat
