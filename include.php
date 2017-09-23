@@ -1,11 +1,13 @@
 <?php
 
-function debug($message) {
-	if (DEBUG) {
-		text($message);
-	}
+function debug($message)
+{
+    if (DEBUG) {
+        text($message);
+    }
 }
 
-function text($message) {
-	echo "\n". $message ."\n";
+function text($message)
+{
+    echo "\n".$message."\n";
 }
