@@ -91,7 +91,7 @@ function saveStringToFile($string, $filename, $fileExtension = '.dat')
 function checkSwitchGlobalMinMax()
 {
     if ($GLOBALS['min'] > $GLOBALS['max']) {
-        debug('!!!! Switching min and max in function !!!!');
+        debug('!!!! Switching min and max !!!!');
 
         $tempMin = $GLOBALS['min'];
 
