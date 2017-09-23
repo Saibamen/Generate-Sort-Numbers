@@ -14,4 +14,4 @@ php:
 
 script:
   - php generate < travis-input.txt
-  - "[ -e testt.dat ] && echo 'File test.dat exists' || (echo 'File test.dat not exists!!' && actually_build)"
+  - "[ -e test.dat ] && echo 'File test.dat exists' || (echo 'File test.dat not exists!!' && fake_command_to_stop_build)"
