@@ -1,0 +1,16 @@
+language: php
+
+os:
+  - linux
+  # PHP is no supported on OS X: https://github.com/travis-ci/travis-ci/issues/2313
+  #- osx
+
+php:
+  - 5.6
+  - 7.0
+  - 7.1
+  - 7.2
+  - nightly
+
+script:
+  - php generate < travis-input.txt
