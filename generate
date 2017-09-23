@@ -1,0 +1,27 @@
+#!/usr/bin/env php
+<?php
+
+// TODO: Read from console arguments
+define("DEBUG", true);
+
+// TODO: Warn about CLI run only!
+
+require_once("includeGenerate.php");
+
+$min = getNumberInput("Type minimum allowed number");
+$max = getNumberInput("Type maximum allowed number");
+
+// Switch min and max if min > max
+checkSwitchGlobalMinMax();
+
+$decimalPlaces = getNumberInput("Type number of decimal places");
+
+// TODO: file size to generate
+
+$filename = getOutputFilename();
+
+text("GENERATING...");
+
+$outputString = generateOutputString($min, $max, $decimalPlaces);
+
+saveStringToFile($outputString, $filename);
