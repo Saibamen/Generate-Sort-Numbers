@@ -1,11 +1,5 @@
 <?php
 
-/*
- * STDIN is already definied. Can be safely deleted?
- * Read PHP < 7.0 documentation
- */
-//define("STDIN", fopen ("php://stdin", "r"));
-
 require_once 'include.php';
 
 function generateOutputString($min, $max, $decimalPlaces)
