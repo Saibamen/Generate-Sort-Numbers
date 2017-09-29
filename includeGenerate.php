@@ -68,8 +68,17 @@ function getOutputFilename()
 
 function saveStringToFile($string, $filename, $fileExtension = '.dat')
 {
-    // TODO: Create dir if not exists
-    // TODO: Warn about overriding file
+    // Create dir if not exists
+    if (!is_dir(dirname($filename))) {
+        debug('Creating missing directory: '.dirname($filename));
+        mkdir(dirname($filename));
+    }
+
+    // Warn about overwriting file
+    if (file_exists($filename.$fileExtension)) {
+        text('File '.$filename.$fileExtension.' exists and it will be overwritten!');
+    }
+
     debug('Saving generated string to file.');
 
     $outputFileBytes = file_put_contents($filename.$fileExtension, $string, LOCK_EX);
