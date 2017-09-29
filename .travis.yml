@@ -14,5 +14,11 @@ php:
   - nightly
 
 script:
-  - php generate < travis-input.txt
+  - php generate < tests/generate_simple.txt
   - "[ -e test.dat ] && echo 'File test.dat exists' || (echo 'File test.dat not exists!!' && fake_command_to_stop_build)"
+  - php generate < tests/generate_directory.txt
+
+after_script:
+  - rm test.dat
+  - rm test/test.dat
+  - rmdir test
