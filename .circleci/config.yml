@@ -6,18 +6,21 @@ version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
+      # Specify the version you desire here
       - image: circleci/php:7.1.8-browsers
 
     steps:
       - checkout
 
       - run: sudo apt-get update
+      - run: sudo apt-get upgrade
 
       - run:
-          name: Display versions
-          command: |
-            php -v
+          name: Display PHP version
+          command: php -v
 
+      # Run tests
       - run: php generate < tests/generate_simple.txt
+      - run: "[ -e test.dat ] && echo 'File test.dat exists' || (echo 'File test.dat not exists!!' && fake_command_to_stop_build)"
       - run: php generate < tests/generate_directory.txt
+      - run: "[ -e test/testt.dat ] && echo 'File test/test.dat exists' || (echo 'File test/test.dat not exists!!' && fake_command_to_stop_build)"
