@@ -18,3 +18,10 @@ PHP console app for [Fingo](http://www.fingo.pl/).
 ```
 php generate
 ```
+
+Generating documentation
+```
+composer self-update (to update Composer)
+composer update
+vendor\bin\phpdoc.bat -d ./ -f generate -t ./docs --ignore "vendor/"
+```

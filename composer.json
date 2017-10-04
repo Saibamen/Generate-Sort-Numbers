@@ -1,6 +1,7 @@
 {
-  "name": "Saibamen/Generate-Sort-Numbers",
+  "name": "saibamen/generate-sort-numbers",
   "description": "PHP console app for Fingo.",
+  "license": "MIT",
   "type": "project",
   "require": {
     "php": ">=5.3.3"
