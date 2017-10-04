@@ -6,6 +6,7 @@ require_once 'text.inc.php';
  * @param $min
  * @param $max
  * @param $decimalPlaces
+ *
  * @return string
  */
 function generateOutputString($min, $max, $decimalPlaces)
@@ -32,6 +33,7 @@ function generateOutputString($min, $max, $decimalPlaces)
 
 /**
  * @param $message
+ *
  * @return string
  */
 function getNumberInput($message)
