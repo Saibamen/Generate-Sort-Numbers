@@ -1,0 +1,14 @@
+{
+  "name": "Saibamen/Generate-Sort-Numbers",
+  "description": "PHP console app for Fingo.",
+  "type": "project",
+  "require": {
+    "php": ">=5.3.3"
+  },
+  "require-dev": {
+    "phpdocumentor/phpdocumentor": "2.*"
+  },
+  "config": {
+    "preferred-install": "dist"
+  }
+}

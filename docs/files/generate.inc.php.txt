@@ -143,3 +143,4 @@ function checkSwitchGlobalMinMax()
         debug('Max: '.$GLOBALS['max']);
     }
 }
+

@@ -7,11 +7,11 @@
 
 # Generate and sort numbers in PHP
 
-PHP console app for Fingo.
+PHP console app for [Fingo](http://www.fingo.pl/).
 
 ## Requirements
 
-* PHP >= 5.4
+* PHP >= 5.2 (>= 5.3.3 if using Composer for generating documentation)
 
 ## Usage
 

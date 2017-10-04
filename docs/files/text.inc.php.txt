@@ -30,3 +30,4 @@ function text($message)
 {
     echo "\n".$message."\n";
 }
+

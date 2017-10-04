@@ -37,3 +37,4 @@ text('GENERATING...');
 $outputString = generateOutputString($min, $max, $decimalPlaces);
 
 saveStringToFile($outputString, $filename);
+
