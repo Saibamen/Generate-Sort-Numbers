@@ -2,18 +2,18 @@
 /**
  * Generate script's functions.
  *
- * @package saibamen/generate-sort-numbers
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
  */
 
+/** Functions for printing text */
 require_once 'text.inc.php';
 
 /**
  * Generates string with randomized numbers.
  *
- * @param $min Minimum allowed number to generate
- * @param $max Maximum allowed number to generate
- * @param $decimalPlaces Number of decimal places
+ * @param string $min Minimum allowed number to generate
+ * @param string $max Maximum allowed number to generate
+ * @param string $decimalPlaces Number of decimal places
  *
  * @return string Generated string without trailing spaces
  */
@@ -21,6 +21,7 @@ function generateOutputString($min, $max, $decimalPlaces)
 {
     // TODO: Inform User how long it take
     debug("Generating string.\nMin: ".$min.' Max: '.$max.' DecimalPlaces: '.$decimalPlaces);
+    /** Time when we start generating process */
     define('GENERATE_START', microtime(true));
 
     $range = $max - $min;
@@ -42,7 +43,7 @@ function generateOutputString($min, $max, $decimalPlaces)
 /**
  * Get number from User.
  *
- * @param $message Message for User what he must type
+ * @param string $message Message for User what he must type
  *
  * @return string Inserted number
  */

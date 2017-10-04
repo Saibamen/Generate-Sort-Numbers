@@ -1,6 +1,5 @@
 #!/usr/bin/env php
 <?php
-
 /**
  * Generate script.
  *
@@ -11,7 +10,8 @@
  */
 
 /**
- * @global bool
+ * If true - print more information
+ *
  * @todo Read from console arguments
  */
 define('DEBUG', true);

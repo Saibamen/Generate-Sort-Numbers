@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Includes simple functions for printing text.
  *
@@ -7,11 +6,11 @@
  */
 
 /**
- * Execute {@see text()} function if DEBUG is set to true.
+ * Execute text() function if DEBUG is set to true.
  *
  * @global bool $DEBUG
  *
- * @param $message
+ * @param string $message
  *
  * @see text()
  */
@@ -25,7 +24,7 @@ function debug($message)
 /**
  * Prints $message with new lines.
  *
- * @param $message
+ * @param string $message
  */
 function text($message)
 {

@@ -15,11 +15,12 @@ PHP console app for [Fingo](http://www.fingo.pl/).
 
 ## Usage
 
+### Generating numbers
 ```
 php generate
 ```
 
-Generating documentation
+### Generating documentation
 ```
 composer self-update (to update Composer)
 composer update
