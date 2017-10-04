@@ -3,15 +3,13 @@
 /**
  * Generate script's functions.
  *
- * @package Saibamen/Generate-Sort-Numbers
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
  */
-
 require_once 'text.inc.php';
 
 /**
- * Generates string with randomized numbers
- * 
+ * Generates string with randomized numbers.
+ *
  * @param $min Minimum allowed number to generate
  * @param $max Maximum allowed number to generate
  * @param $decimalPlaces Number of decimal places
@@ -41,7 +39,7 @@ function generateOutputString($min, $max, $decimalPlaces)
 }
 
 /**
- * Get number from User
+ * Get number from User.
  *
  * @param $message Message for User what he must type
  *
@@ -67,7 +65,7 @@ function getNumberInput($message)
 }
 
 /**
- * Get output filename from User
+ * Get output filename from User.
  *
  * @return string Inserted filename
  */
@@ -97,9 +95,10 @@ function getOutputFilename()
 /**
  * Saving generated string to file.
  *
- * @param string $string Generated string with numbers
- * @param string $filename Output filename without extension
+ * @param string $string        Generated string with numbers
+ * @param string $filename      Output filename without extension
  * @param string $fileExtension File extension. Default is '.dat'
+ *
  * @see generateOutputString()
  */
 function saveStringToFile($string, $filename, $fileExtension = '.dat')
@@ -127,7 +126,7 @@ function saveStringToFile($string, $filename, $fileExtension = '.dat')
 }
 
 /**
- * Switch Globals min and max if min > max
+ * Switch Globals min and max if min > max.
  */
 function checkSwitchGlobalMinMax()
 {
