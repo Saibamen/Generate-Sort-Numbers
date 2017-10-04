@@ -11,8 +11,8 @@ require_once 'text.inc.php';
 /**
  * Generates string with randomized numbers.
  *
- * @param string $min Minimum allowed number to generate
- * @param string $max Maximum allowed number to generate
+ * @param string $min           Minimum allowed number to generate
+ * @param string $max           Maximum allowed number to generate
  * @param string $decimalPlaces Number of decimal places
  *
  * @return string Generated string without trailing spaces
@@ -21,7 +21,7 @@ function generateOutputString($min, $max, $decimalPlaces)
 {
     // TODO: Inform User how long it take
     debug("Generating string.\nMin: ".$min.' Max: '.$max.' DecimalPlaces: '.$decimalPlaces);
-    /** Time when we start generating process */
+    /* Time when we start generating process */
     define('GENERATE_START', microtime(true));
 
     $range = $max - $min;
