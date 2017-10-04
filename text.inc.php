@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @param $message
+ */
 function debug($message)
 {
     if (DEBUG) {
@@ -7,6 +10,9 @@ function debug($message)
     }
 }
 
+/**
+ * @param $message
+ */
 function text($message)
 {
     echo "\n".$message."\n";

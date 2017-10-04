@@ -1,7 +1,13 @@
 <?php
 
-require_once 'include.php';
+require_once 'text.inc.php';
 
+/**
+ * @param $min
+ * @param $max
+ * @param $decimalPlaces
+ * @return string
+ */
 function generateOutputString($min, $max, $decimalPlaces)
 {
     // TODO: Inform User how long it take
@@ -24,6 +30,10 @@ function generateOutputString($min, $max, $decimalPlaces)
     return trim($outputString);
 }
 
+/**
+ * @param $message
+ * @return string
+ */
 function getNumberInput($message)
 {
     echo $message.': ';
@@ -43,6 +53,9 @@ function getNumberInput($message)
     return $input;
 }
 
+/**
+ * @return string
+ */
 function getOutputFilename()
 {
     echo 'Type output filename (without extension): ';
@@ -66,6 +79,11 @@ function getOutputFilename()
     return $input;
 }
 
+/**
+ * @param $string
+ * @param $filename
+ * @param string $fileExtension
+ */
 function saveStringToFile($string, $filename, $fileExtension = '.dat')
 {
     // Create dir if not exists
@@ -94,7 +112,7 @@ function saveStringToFile($string, $filename, $fileExtension = '.dat')
 function checkSwitchGlobalMinMax()
 {
     if ($GLOBALS['min'] > $GLOBALS['max']) {
-        debug('!!!! Switching min and max !!!!');
+        debug('!! Switching min and max !!');
 
         $tempMin = $GLOBALS['min'];
 

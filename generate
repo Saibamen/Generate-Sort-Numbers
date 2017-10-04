@@ -6,7 +6,7 @@ define('DEBUG', true);
 
 // TODO: Warn about CLI run only!
 
-require_once('includeGenerate.php');
+require_once('generate.inc.php');
 
 $min = getNumberInput('Type minimum allowed number');
 $max = getNumberInput('Type maximum allowed number');
