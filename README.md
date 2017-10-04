@@ -11,7 +11,7 @@ PHP console app for Fingo.
 
 ## Requirements
 
-* PHP >= 5.5
+* PHP >= 5.4
 
 ## Usage
 
