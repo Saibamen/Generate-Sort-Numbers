@@ -2,10 +2,8 @@
 /**
  * Generate script's functions.
  *
- * @package saibamen/generate-sort-numbers
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
  */
-
 require_once 'text.inc.php';
 
 /**
