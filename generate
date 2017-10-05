@@ -32,8 +32,6 @@ $decimalPlaces = getNumberInput('Type number of decimal places');
 
 $filename = getOutputFilename();
 
-text('GENERATING...');
-
 $outputString = generateOutputString($min, $max, $decimalPlaces);
 
 saveStringToFile($outputString, $filename);

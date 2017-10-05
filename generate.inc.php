@@ -19,9 +19,11 @@ require_once 'text.inc.php';
  */
 function generateOutputString($min, $max, $decimalPlaces)
 {
+    text('GENERATING...');
     // TODO: Inform User how long it take
     debug("Generating string.\nMin: ".$min.' Max: '.$max.' DecimalPlaces: '.$decimalPlaces);
-    /* Time when we start generating process */
+
+    /** @const Time when we started generating process */
     define('GENERATE_START', microtime(true));
 
     $range = $max - $min;
@@ -31,7 +33,7 @@ function generateOutputString($min, $max, $decimalPlaces)
     for ($i = 0; $i < 10; $i++) {
         $number = $min + $range * (mt_rand() / mt_getrandmax());
         // Format with trailing zeros ie. 8.00
-        $number = number_format((float) $number, $decimalPlaces, '.', '');
+        $number = number_format((float) $number, (int) $decimalPlaces, '.', '');
         debug($number);
         $outputString .= $number.' ';
     }
@@ -116,7 +118,7 @@ function saveStringToFile($string, $filename, $fileExtension = '.dat')
         text('File '.$filename.$fileExtension.' exists and it will be overwritten!');
     }
 
-    debug('Saving generated string to file.');
+    debug('Saving generated string to file...');
 
     $outputFileBytes = file_put_contents($filename.$fileExtension, $string, LOCK_EX);
 
