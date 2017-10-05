@@ -23,7 +23,7 @@ function generateOutputString($min, $max, $decimalPlaces)
     // TODO: Inform User how long it take
     debug("Generating string.\nMin: ".$min.' Max: '.$max.' DecimalPlaces: '.$decimalPlaces);
 
-    /** @const Time when we started generating process */
+    /* @const Time when we started generating process */
     define('GENERATE_START', microtime(true));
 
     $range = $max - $min;
