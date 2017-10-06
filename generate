@@ -9,14 +9,17 @@
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
  */
 
+// Run only in CLI
+if (php_sapi_name() !== 'cli') {
+    exit('This is console app. Please run it in console (CLI)!');
+}
+
 /**
  * If true - print more information
  *
  * @todo Read from console arguments
  */
 define('DEBUG', true);
-
-// TODO: Warn about CLI run only!
 
 require_once('generate.inc.php');
 
