@@ -24,7 +24,7 @@ define('DEBUG', true);
 require_once('generate.inc.php');
 
 $min = getNumberInput('Type minimum allowed number');
-$max = getNumberInput('Type maximum allowed number');
+$max = getNumberInput('Type maximum allowed number', 10);
 
 // Switch min and max if min > max
 checkSwitchGlobalMinMax();

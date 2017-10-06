@@ -20,7 +20,7 @@ require_once 'console.inc.php';
 function generateRandomNumbers($min, $max, $decimalPlaces)
 {
     text('GENERATING...');
-    debug("Generating string.\nMin: ".$min.' Max: '.$max.' DecimalPlaces: '.$decimalPlaces);
+    debug("Generating string.\nMin: ".$min.' Max: '.$max.' Decimal places: '.$decimalPlaces);
 
     $range = $max - $min;
     $outputString = '';
@@ -37,11 +37,11 @@ function generateRandomNumbers($min, $max, $decimalPlaces)
         $number = $min + $range * (mt_rand() / mt_getrandmax());
         // Format with trailing zeros ie. 8.00
         $number = number_format((float) $number, (int) $decimalPlaces, '.', '');
-        debug($number);
         $outputString .= $number.' ';
     }
 
     printEndTime($GENERATE_START);
+    debug($outputString);
 
     // Remove last space
     return trim($outputString);
@@ -51,24 +51,25 @@ function generateRandomNumbers($min, $max, $decimalPlaces)
  * Get number from User.
  *
  * @param string $message Message for User what he must type
+ * @param int $default Default number for empty input. Default is 0
  *
  * @return string Inserted number
  */
-function getNumberInput($message)
+function getNumberInput($message, $default = 0)
 {
-    echo $message.': ';
+    echo $message.' [Default: '.$default.']: ';
 
     do {
         $input = trim(fgets(STDIN));
         debug('User input: '.$input);
 
-        $isInputWrong = is_null($input) || !is_numeric($input);
-
-        // TODO: Use default numbers?
-        if ($isInputWrong) {
+        if (is_null($input) || empty($input)) {
+            debug('Using default input: '. $default);
+            $input = $default;
+        } elseif (!is_numeric($input)) {
             echo 'Please input number: ';
         }
-    } while ($isInputWrong);
+    } while (!is_numeric($input));
 
     return $input;
 }

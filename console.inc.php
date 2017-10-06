@@ -25,6 +25,7 @@ function saveStringToFile($string, $filename, $fileExtension = '.dat')
     // Warn about overwriting file
     if (file_exists($filename.$fileExtension)) {
         text('File '.$filename.$fileExtension.' exists and it will be overwritten!');
+        getUserConfirm(true);
     }
 
     text('Saving to file...');
@@ -54,7 +55,7 @@ function getFilenameInput($message)
          * (Windows)    \/:*?"<>|   (check \ and / only at the end of string - need to test)
          * (Linux)      /
          */
-        $isInputWrong = is_null($input);
+        $isInputWrong = is_null($input) || empty($input);
 
         if ($isInputWrong) {
             echo 'Please input filename: ';
@@ -62,6 +63,36 @@ function getFilenameInput($message)
     } while ($isInputWrong);
 
     return $input;
+}
+
+/**
+ * Get User confirmation. Default is YES.
+ *
+ * @param bool $die If true - script dies if User denial
+ *
+ * @return bool Confirmation result
+ */
+function getUserConfirm($die = false)
+{
+    while (1) {
+        echo 'Do you really want to continue? [Y/n]: ';
+
+        $input = trim(fgets(STDIN));
+
+        // Default is YES
+        if (is_null($input) || empty($input) || strtolower($input) == 'y' || strtolower($input) == 'yes') {
+            return true;
+        } elseif (strtolower($input) == 'n' || strtolower($input) == 'no') {
+            if ($die) {
+                die('Script terminated by user.');
+            }
+
+            return false;
+        }
+    }
+
+    // Fix missing return statement warning. Return true...
+    return true;
 }
 
 /**
