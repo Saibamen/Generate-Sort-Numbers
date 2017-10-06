@@ -96,5 +96,5 @@ function checkSwitchMinMax($min, $max)
         debug('Max: '.$max);
     }
 
-    return ['min' => $min, 'max' => $max];
+    return array('min' => $min, 'max' => $max);
 }
