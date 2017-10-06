@@ -1,6 +1,6 @@
 <?php
 /**
- * Functions for 'Generate' script
+ * Functions for 'Generate' script.
  *
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
  */

@@ -65,7 +65,7 @@ function getFilenameInput($message)
 }
 
 /**
- * Prints how much time took some action in milliseconds
+ * Prints how much time took some action in milliseconds.
  *
  * @param float $startTime Time when action started
  */
