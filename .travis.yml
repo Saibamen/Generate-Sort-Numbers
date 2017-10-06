@@ -22,12 +22,16 @@ matrix:
       dist: precise
 
 script:
+  ### Generate
   - php generate < tests/generate_simple.txt
   - "[ -e test.dat ] && echo 'File test.dat exists' || (echo 'File test.dat not exists!!' && fake_command_to_stop_build)"
   - php generate < tests/generate_directory.txt
   - "[ -e test/test.dat ] && echo 'File test/test.dat exists' || (echo 'File test/test.dat not exists!!' && fake_command_to_stop_build)"
+  - php generate < tests/generate_default_numbers.txt
+  - "[ -e test/default_numbers.dat ] && echo 'File test/default_numbers.dat exists' || (echo 'File test/default_numbers.dat not exists!!' && fake_command_to_stop_build)"
 
 after_script:
   - rm test.dat
   - rm test/test.dat
   - rmdir test
+  - rm default_numbers.dat
