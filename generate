@@ -27,7 +27,10 @@ $min = getNumberInput('Type minimum allowed number');
 $max = getNumberInput('Type maximum allowed number', 10);
 
 // Switch min and max if min > max
-checkSwitchGlobalMinMax();
+$minMax = checkSwitchMinMax($min, $max);
+
+$min = $minMax['min'];
+$max = $minMax['max'];
 
 $decimalPlaces = getNumberInput('Type number of decimal places');
 

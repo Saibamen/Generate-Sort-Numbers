@@ -9,22 +9,28 @@
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
  */
 
+// Run only in CLI
+if (php_sapi_name() !== 'cli') {
+    exit('This is console app. Please run it in console (CLI)!');
+}
+
 /**
  * If true - print more information
  *
  * @todo Read from console arguments
  */
-define('DEBUG', false);
-
-// TODO: Warn about CLI run only!
+define('DEBUG', true);
 
 require_once('generate.inc.php');
 
 $min = getNumberInput('Type minimum allowed number');
-$max = getNumberInput('Type maximum allowed number');
+$max = getNumberInput('Type maximum allowed number', 10);
 
 // Switch min and max if min > max
-checkSwitchGlobalMinMax();
+$minMax = checkSwitchMinMax($min, $max);
+
+$min = $minMax['min'];
+$max = $minMax['max'];
 
 $decimalPlaces = getNumberInput('Type number of decimal places');
 

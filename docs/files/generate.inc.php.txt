@@ -1,6 +1,6 @@
 <?php
 /**
- * Functions for 'Generate' script
+ * Functions for 'Generate' script.
  *
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
  */
@@ -11,20 +11,20 @@ require_once 'console.inc.php';
 /**
  * Generate string with randomized numbers.
  *
- * @param string $min           Minimum allowed number to generate
- * @param string $max           Maximum allowed number to generate
- * @param string $decimalPlaces Number of decimal places
+ * @param int|float $min           Minimum allowed number to generate
+ * @param int|float $max           Maximum allowed number to generate
+ * @param int|float $decimalPlaces Number of decimal places
  *
  * @return string Generated string without trailing spaces
  */
 function generateRandomNumbers($min, $max, $decimalPlaces)
 {
     text('GENERATING...');
-    debug("Generating string.\nMin: ".$min.' Max: '.$max.' DecimalPlaces: '.$decimalPlaces);
+    debug("Generating string.\nMin: ".$min.' Max: '.$max.' Decimal places: '.$decimalPlaces);
 
     $range = $max - $min;
     $outputString = '';
-    $howManyIterations = 10;
+    $howManyIterations = 100;
 
     $GENERATE_START = microtime(true);
 
@@ -37,11 +37,11 @@ function generateRandomNumbers($min, $max, $decimalPlaces)
         $number = $min + $range * (mt_rand() / mt_getrandmax());
         // Format with trailing zeros ie. 8.00
         $number = number_format((float) $number, (int) $decimalPlaces, '.', '');
-        debug($number);
         $outputString .= $number.' ';
     }
 
     printEndTime($GENERATE_START);
+    debug($outputString);
 
     // Remove last space
     return trim($outputString);
@@ -50,44 +50,52 @@ function generateRandomNumbers($min, $max, $decimalPlaces)
 /**
  * Get number from User.
  *
- * @param string $message Message for User what he must type
+ * @param string       $message Message for User what he must type
+ * @param int|float    $default Default number for empty input. Default is 0
  *
- * @return string Inserted number
+ * @return float Inserted number
  */
-function getNumberInput($message)
+function getNumberInput($message, $default = 0)
 {
-    echo $message.': ';
+    echo $message.' [Default: '.$default.']: ';
 
     do {
         $input = trim(fgets(STDIN));
         debug('User input: '.$input);
 
-        $isInputWrong = is_null($input) || !is_numeric($input);
-
-        // TODO: Use default numbers?
-        if ($isInputWrong) {
+        if (is_null($input) || empty($input)) {
+            debug('Using default input: '.$default);
+            $input = $default;
+        } elseif (!is_numeric($input)) {
             echo 'Please input number: ';
         }
-    } while ($isInputWrong);
+    } while (!is_numeric($input));
 
-    return $input;
+    return (float) $input;
 }
 
 /**
- * Switch Globals min and max if min > max.
+ * Switch min and max if min > max.
+ *
+ * @param float $min Minimum
+ * @param float $max Maximum
+ *
+ * @return array
  */
-function checkSwitchGlobalMinMax()
+function checkSwitchMinMax($min, $max)
 {
-    if ($GLOBALS['min'] > $GLOBALS['max']) {
+    if ($min > $max) {
         debug('!! Switching min and max !!');
 
-        $tempMin = $GLOBALS['min'];
+        $tempMin = $min;
 
-        $GLOBALS['min'] = $GLOBALS['max'];
-        $GLOBALS['max'] = $tempMin;
+        $min = $max;
+        $max = $tempMin;
 
-        debug('Min: '.$GLOBALS['min']);
-        debug('Max: '.$GLOBALS['max']);
+        debug('Min: '.$min);
+        debug('Max: '.$max);
     }
+
+    return array('min' => $min, 'max' => $max);
 }
 

@@ -11,9 +11,9 @@ require_once 'console.inc.php';
 /**
  * Generate string with randomized numbers.
  *
- * @param string $min           Minimum allowed number to generate
- * @param string $max           Maximum allowed number to generate
- * @param string $decimalPlaces Number of decimal places
+ * @param int|float $min           Minimum allowed number to generate
+ * @param int|float $max           Maximum allowed number to generate
+ * @param int|float $decimalPlaces Number of decimal places
  *
  * @return string Generated string without trailing spaces
  */
@@ -24,7 +24,7 @@ function generateRandomNumbers($min, $max, $decimalPlaces)
 
     $range = $max - $min;
     $outputString = '';
-    $howManyIterations = 10;
+    $howManyIterations = 100;
 
     $GENERATE_START = microtime(true);
 
@@ -50,10 +50,10 @@ function generateRandomNumbers($min, $max, $decimalPlaces)
 /**
  * Get number from User.
  *
- * @param string $message Message for User what he must type
- * @param int    $default Default number for empty input. Default is 0
+ * @param string       $message Message for User what he must type
+ * @param int|float    $default Default number for empty input. Default is 0
  *
- * @return string Inserted number
+ * @return float Inserted number
  */
 function getNumberInput($message, $default = 0)
 {
@@ -71,23 +71,30 @@ function getNumberInput($message, $default = 0)
         }
     } while (!is_numeric($input));
 
-    return $input;
+    return (float) $input;
 }
 
 /**
- * Switch Globals min and max if min > max.
+ * Switch min and max if min > max.
+ *
+ * @param float $min Minimum
+ * @param float $max Maximum
+ *
+ * @return array
  */
-function checkSwitchGlobalMinMax()
+function checkSwitchMinMax($min, $max)
 {
-    if ($GLOBALS['min'] > $GLOBALS['max']) {
+    if ($min > $max) {
         debug('!! Switching min and max !!');
 
-        $tempMin = $GLOBALS['min'];
+        $tempMin = $min;
 
-        $GLOBALS['min'] = $GLOBALS['max'];
-        $GLOBALS['max'] = $tempMin;
+        $min = $max;
+        $max = $tempMin;
 
-        debug('Min: '.$GLOBALS['min']);
-        debug('Max: '.$GLOBALS['max']);
+        debug('Min: '.$min);
+        debug('Max: '.$max);
     }
+
+    return array('min' => $min, 'max' => $max);
 }

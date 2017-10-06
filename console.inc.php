@@ -113,7 +113,7 @@ function printEndTime($startTime)
  *
  * @global bool $DEBUG
  *
- * @param string $message Message to print if in DEBUG mode
+ * @param mixed $message Message to print if in DEBUG mode
  *
  * @see text()
  */
@@ -127,7 +127,7 @@ function debug($message)
 /**
  * Prints message with new lines.
  *
- * @param string $message Message to print
+ * @param mixed $message Message to print
  */
 function text($message)
 {
