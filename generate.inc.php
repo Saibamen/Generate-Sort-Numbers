@@ -1,15 +1,15 @@
 <?php
 /**
- * Generate script's functions.
+ * Functions for 'Generate' script
  *
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
  */
 
-/** Functions for printing text */
-require_once 'text.inc.php';
+/** Functions for inputs, saving file and printing text */
+require_once 'console.inc.php';
 
 /**
- * Generates string with randomized numbers.
+ * Generate string with randomized numbers.
  *
  * @param string $min           Minimum allowed number to generate
  * @param string $max           Maximum allowed number to generate
@@ -17,26 +17,31 @@ require_once 'text.inc.php';
  *
  * @return string Generated string without trailing spaces
  */
-function generateOutputString($min, $max, $decimalPlaces)
+function generateRandomNumbers($min, $max, $decimalPlaces)
 {
     text('GENERATING...');
-    // TODO: Inform User how long it take
     debug("Generating string.\nMin: ".$min.' Max: '.$max.' DecimalPlaces: '.$decimalPlaces);
-
-    /* @const Time when we started generating process */
-    define('GENERATE_START', microtime(true));
 
     $range = $max - $min;
     $outputString = '';
+    $howManyIterations = 10;
 
+    $GENERATE_START = microtime(true);
+
+    // TODO: Show percent progress based on iteration
     // TODO: Calculate output size for generate
-    for ($i = 0; $i < 10; $i++) {
+    for ($i = 0; $i <= $howManyIterations; $i++) {
+        // Print progress and move cursor back to position 0
+        echo 'Progress: '.$i.'/'.$howManyIterations."\r";
+
         $number = $min + $range * (mt_rand() / mt_getrandmax());
         // Format with trailing zeros ie. 8.00
         $number = number_format((float) $number, (int) $decimalPlaces, '.', '');
         debug($number);
         $outputString .= $number.' ';
     }
+
+    printEndTime($GENERATE_START);
 
     // Remove last space
     return trim($outputString);
@@ -66,67 +71,6 @@ function getNumberInput($message)
     } while ($isInputWrong);
 
     return $input;
-}
-
-/**
- * Get output filename from User.
- *
- * @return string Inserted filename
- */
-function getOutputFilename()
-{
-    echo 'Type output filename (without extension): ';
-
-    do {
-        $input = trim(fgets(STDIN));
-        debug('User input: '.$input);
-
-        /*
-         * TODO: Invalid characters:
-         * (Windows)    \/:*?"<>|   (check \ and / only at the end of string - need to test)
-         * (Linux)      /
-         */
-        $isInputWrong = is_null($input);
-
-        if ($isInputWrong) {
-            echo 'Please input filename: ';
-        }
-    } while ($isInputWrong);
-
-    return $input;
-}
-
-/**
- * Saving generated string to file.
- *
- * @param string $string        Generated string with numbers
- * @param string $filename      Output filename without extension
- * @param string $fileExtension File extension. Default is '.dat'
- *
- * @see generateOutputString()
- */
-function saveStringToFile($string, $filename, $fileExtension = '.dat')
-{
-    // Create dir if not exists
-    if (!is_dir(dirname($filename))) {
-        debug('Creating missing directory: '.dirname($filename));
-        mkdir(dirname($filename));
-    }
-
-    // Warn about overwriting file
-    if (file_exists($filename.$fileExtension)) {
-        text('File '.$filename.$fileExtension.' exists and it will be overwritten!');
-    }
-
-    debug('Saving generated string to file...');
-
-    $outputFileBytes = file_put_contents($filename.$fileExtension, $string, LOCK_EX);
-
-    text('Output file '.$filename.$fileExtension.' generated with '.$outputFileBytes.' bytes.');
-
-    $endTime = microtime(true) - GENERATE_START;
-    $endTime = number_format((float) $endTime, 4, '.', '');
-    text('It was done in '.$endTime.' ms.');
 }
 
 /**

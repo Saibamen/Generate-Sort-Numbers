@@ -14,7 +14,7 @@
  *
  * @todo Read from console arguments
  */
-define('DEBUG', true);
+define('DEBUG', false);
 
 // TODO: Warn about CLI run only!
 
@@ -30,11 +30,9 @@ $decimalPlaces = getNumberInput('Type number of decimal places');
 
 // TODO: File size to generate
 
-$filename = getOutputFilename();
+$filename = getFilenameInput('Type output filename (without extension)');
 
-text('GENERATING...');
-
-$outputString = generateOutputString($min, $max, $decimalPlaces);
+$outputString = generateRandomNumbers($min, $max, $decimalPlaces);
 
 saveStringToFile($outputString, $filename);
 

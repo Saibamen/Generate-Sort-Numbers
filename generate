@@ -30,8 +30,8 @@ $decimalPlaces = getNumberInput('Type number of decimal places');
 
 // TODO: File size to generate
 
-$filename = getOutputFilename();
+$filename = getFilenameInput('Type output filename (without extension)');
 
-$outputString = generateOutputString($min, $max, $decimalPlaces);
+$outputString = generateRandomNumbers($min, $max, $decimalPlaces);
 
 saveStringToFile($outputString, $filename);
