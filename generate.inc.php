@@ -51,7 +51,7 @@ function generateRandomNumbers($min, $max, $decimalPlaces)
  * Get number from User.
  *
  * @param string $message Message for User what he must type
- * @param int $default Default number for empty input. Default is 0
+ * @param int    $default Default number for empty input. Default is 0
  *
  * @return string Inserted number
  */
@@ -64,7 +64,7 @@ function getNumberInput($message, $default = 0)
         debug('User input: '.$input);
 
         if (is_null($input) || empty($input)) {
-            debug('Using default input: '. $default);
+            debug('Using default input: '.$default);
             $input = $default;
         } elseif (!is_numeric($input)) {
             echo 'Please input number: ';
