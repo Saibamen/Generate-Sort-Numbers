@@ -50,8 +50,8 @@ function generateRandomNumbers($min, $max, $decimalPlaces)
 /**
  * Get number from User.
  *
- * @param string       $message Message for User what he must type
- * @param int|float    $default Default number for empty input. Default is 0
+ * @param string    $message Message for User what he must type
+ * @param int|float $default Default number for empty input. Default is 0
  *
  * @return float Inserted number
  */
