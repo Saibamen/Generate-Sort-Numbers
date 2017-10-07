@@ -112,29 +112,3 @@ function printEndTime($startTime)
 
     text\text('It was done in '.$endTime.' ms.');
 }
-
-/**
- * Execute text() function if DEBUG is set to true.
- *
- * @global bool $DEBUG
- *
- * @param mixed $message Message to print if in DEBUG mode
- *
- * @see text()
- */
-/*function debug($message)
-{
-    if (DEBUG) {
-        text($message);
-    }
-}*/
-
-/**
- * Prints message with new lines.
- *
- * @param mixed $message Message to print
- */
-/*function text($message)
-{
-    echo "\n".$message."\n";
-}*/
