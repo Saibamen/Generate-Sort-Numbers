@@ -43,7 +43,7 @@ function generateRandomNumbers($min, $max, $decimalPlaces)
         $outputString .= $number.' ';
     }
 
-    Text\printEndTime($generateStart);
+    Text\printTimeDuration($generateStart);
     Text\debug($outputString);
 
     // Remove last space
