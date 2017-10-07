@@ -22,8 +22,8 @@ require_once 'Text.php';
  */
 function generateRandomNumbers($min, $max, $decimalPlaces)
 {
-    Text\message('GENERATING...');
-    Text\debug("Generating string.\nMin: ".$min.' Max: '.$max.' Decimal places: '.$decimalPlaces);
+    Text::message('GENERATING...');
+    Text::debug("Generating string.\nMin: ".$min.' Max: '.$max.' Decimal places: '.$decimalPlaces);
 
     $range = $max - $min;
     $outputString = '';
@@ -43,8 +43,8 @@ function generateRandomNumbers($min, $max, $decimalPlaces)
         $outputString .= $number.' ';
     }
 
-    Text\printEndTime($generateStart);
-    Text\debug($outputString);
+    Text::printTimeDuration($generateStart);
+    Text::debug($outputString);
 
     // Remove last space
     return trim($outputString);
@@ -61,15 +61,15 @@ function generateRandomNumbers($min, $max, $decimalPlaces)
 function checkSwitchMinMax($min, $max)
 {
     if ($min > $max) {
-        Text\debug('!! Switching min and max !!');
+        Text::debug('!! Switching min and max !!');
 
         $tempMin = $min;
 
         $min = $max;
         $max = $tempMin;
 
-        Text\debug('Min: '.$min);
-        Text\debug('Max: '.$max);
+        Text::debug('Min: '.$min);
+        Text::debug('Max: '.$max);
     }
 
     return array('min' => $min, 'max' => $max);

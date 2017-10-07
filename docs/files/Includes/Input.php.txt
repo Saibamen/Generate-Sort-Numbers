@@ -23,10 +23,10 @@ function getNumberInput($message, $default = 0)
 
     do {
         $input = trim(fgets(STDIN));
-        Text\debug('User input: '.$input);
+        Text::debug('User input: '.$input);
 
         if (is_null($input) || empty($input)) {
-            Text\debug('Using default input: '.$default);
+            Text::debug('Using default input: '.$default);
             $input = $default;
         } elseif (!is_numeric($input)) {
             echo 'Please input number: ';
@@ -49,7 +49,7 @@ function getFilenameInput($message)
 
     do {
         $input = trim(fgets(STDIN));
-        Text\debug('User input: '.$input);
+        Text::debug('User input: '.$input);
 
         /*
          * TODO: Invalid characters:

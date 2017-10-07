@@ -12,6 +12,7 @@ namespace Generate;
 use Includes\File;
 use Includes\Generate;
 use Includes\Input;
+use Includes\Text;
 
 require_once 'Includes/Generate.php';
 require_once 'Includes/Input.php';
@@ -22,14 +23,8 @@ if (php_sapi_name() !== 'cli') {
     exit('This is console app. Please run it in console (CLI)!');
 }
 
-/**
- * If true - print more information.
- *
- * @var bool
- *
- * @todo Read from console arguments
- */
-define('DEBUG', true);
+// TODO: Read from console arguments
+Text::setDebug(true);
 
 $min = Input\getNumberInput('Type minimum allowed number');
 $max = Input\getNumberInput('Type maximum allowed number', 10);

@@ -1,53 +1,89 @@
 <?php
 /**
- * Functions for printing text.
+ * Includes/Text.php
  *
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
+ * @license MIT
+ * @link    https://github.com/Saibamen/Generate-Sort-Numbers
  */
 
-namespace Includes\Text;
+namespace Includes;
 
 /**
- * Prints how much time took some action in milliseconds.
- *
- * @param float|string $startTime Time when action started
+ * Functions for printing text.
  */
-function printTimeDuration($startTime)
+class Text
 {
-    $currentTime = microtime(true);
+    /**
+     * @var bool If true - print more information.
+     */
+    private static $debugMode = false;
 
-    if (gettype($startTime) === 'string') {
-        $currentTime = microtime();
+    /**
+     * Prints how much time took some action in milliseconds.
+     *
+     * @param float|string $startTime Time when action started
+     */
+    public static function printTimeDuration($startTime)
+    {
+        $currentTime = microtime(true);
+
+        if (gettype($startTime) === 'string') {
+            $currentTime = microtime();
+        }
+
+        $completedIn = (float) $currentTime - (float) $startTime;
+        $completedIn = number_format((float) $completedIn, 4, '.', '');
+
+        self::message('It was done in '.$completedIn.' ms.');
     }
 
-    $completedIn = (float) $currentTime - (float) $startTime;
-    $completedIn = number_format((float) $completedIn, 4, '.', '');
-
-    message('It was done in '.$completedIn.' ms.');
-}
-
-/**
- * Execute message() function if DEBUG is set to true.
- *
- * @global bool $DEBUG
- *
- * @param mixed $message Message to print if in DEBUG mode
- *
- * @see \Includes\Text\message()
- */
-function debug($message)
-{
-    if (DEBUG) {
-        message($message);
+    /**
+     * Set $debugMode property value
+     *
+     * @param bool $value
+     *
+     * @see Text::$debugMode
+     */
+    public static function setDebug($value)
+    {
+        Text::$debugMode = $value;
     }
-}
 
-/**
- * Prints message with new lines.
- *
- * @param mixed $message Message to print
- */
-function message($message)
-{
-    echo "\n".$message."\n";
+    /**
+     * Get $debugMode property value
+     *
+     * @return bool
+     *
+     * @see Text::$debugMode
+     */
+    public static function getDebug()
+    {
+        return Text::$debugMode;
+    }
+
+    /**
+     * Execute message() function if $debugMode is set to true.
+     *
+     * @param mixed $message Message to print if in DEBUG mode
+     *
+     * @see Text::$debugMode
+     * @see Text::message()
+     */
+    public static function debug($message)
+    {
+        if (Text::$debugMode) {
+            Text::message($message);
+        }
+    }
+
+    /**
+     * Prints message with new lines.
+     *
+     * @param mixed $message Message to print
+     */
+    public static function message($message)
+    {
+        echo "\n".$message."\n";
+    }
 }
