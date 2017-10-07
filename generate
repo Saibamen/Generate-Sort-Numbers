@@ -14,9 +14,9 @@ use Includes\File;
 use Includes\Generate;
 use Includes\Input;
 
-require_once 'Includes\Generate.php';
-require_once 'Includes\Input.php';
-require_once 'Includes\File.php';
+require_once 'Includes/Generate.php';
+require_once 'Includes/Input.php';
+require_once 'Includes/File.php';
 
 // Run only in CLI
 if (php_sapi_name() !== 'cli') {
