@@ -5,7 +5,7 @@
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
  */
 
-namespace Text;
+namespace Text;ff
 
 /**
  * Prints how much time took some action in milliseconds.
