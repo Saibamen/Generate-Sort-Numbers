@@ -30,8 +30,6 @@ script:
   # Test for positive confirmation
   - php generate < tests/generate_simple.txt
   - php generate < tests/generate_negative_confirmation.txt
-  - composer update
-  - vendor/bin/phpdoc -d ./ -f generate -t ./docs --ignore "vendor/"
 
 after_script:
   - rm test.dat
