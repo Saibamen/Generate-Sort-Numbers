@@ -12,17 +12,35 @@ PHP console app for [Fingo](http://www.fingo.pl/).
 ## Requirements
 
 * PHP >= 5.3.3
+* [Composer](https://getcomposer.org/) if you want to generate documentation
 
 ## Usage
 
 ### Generating numbers
+
+Run generate script and follow instructions:
+
 ```
 php generate
 ```
 
 ### Generating documentation
+
+Update Composer and install [phpDocumentor](https://www.phpdoc.org/) from composer.json:
+
 ```
-composer self-update (to update Composer)
+composer self-update
 composer update
+```
+
+Generate documentation:
+
+Under Linux / MacOSX:
+```
+vendor/bin/phpdoc -d ./ -f generate -t ./docs --ignore "vendor/"
+```
+
+Under Windows:
+```
 vendor\bin\phpdoc.bat -d ./ -f generate -t ./docs --ignore "vendor/"
 ```
