@@ -1,7 +1,5 @@
 #!/usr/bin/env php
 <?php
-namespace generate_sort_numbers\generate;
-
 /**
  * Generate script.
  *
@@ -9,8 +7,16 @@ namespace generate_sort_numbers\generate;
  *
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
  */
-use generate_sort_numbers\console;
-use generate_sort_numbers\generateinc;
+
+namespace Generate;
+
+use File;
+use Generateinc;
+use Input;
+
+require_once 'generate.inc.php';
+require_once 'Input.php';
+require_once 'File.php';
 
 // Run only in CLI
 if (php_sapi_name() !== 'cli') {
@@ -26,23 +32,21 @@ if (php_sapi_name() !== 'cli') {
  */
 define('DEBUG', true);
 
-require_once 'generate.inc.php';
-
-$min = generateinc\getNumberInput('Type minimum allowed number');
-$max = generateinc\getNumberInput('Type maximum allowed number', 10);
+$min = Input\getNumberInput('Type minimum allowed number');
+$max = Input\getNumberInput('Type maximum allowed number', 10);
 
 // Switch min and max if min > max
-$minMax = generateinc\checkSwitchMinMax($min, $max);
+$minMax = Generateinc\checkSwitchMinMax($min, $max);
 
 $min = $minMax['min'];
 $max = $minMax['max'];
 
-$decimalPlaces = generateinc\getNumberInput('Type number of decimal places');
+$decimalPlaces = Input\getNumberInput('Type number of decimal places');
 
 // TODO: File size to generate
 
-$filename = console\getFilenameInput('Type output filename (without extension)');
+$filename = Input\getFilenameInput('Type output filename (without extension)');
 
-$outputString = generateinc\generateRandomNumbers($min, $max, $decimalPlaces);
+$outputString = Generateinc\generateRandomNumbers($min, $max, $decimalPlaces);
 
-console\saveStringToFile($outputString, $filename);
+File\saveStringToFile($outputString, $filename);

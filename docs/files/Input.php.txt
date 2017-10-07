@@ -1,44 +1,39 @@
 <?php
-
-namespace generate_sort_numbers\console;
-
 /**
- * Functions for console scripts.
+ * Functions for receiving input from User.
  *
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
  */
-use generate_sort_numbers\text;
 
-require_once 'text.php';
+namespace Input;
+
+use Text;
 
 /**
- * Saves string to file.
+ * Get number from User.
  *
- * @param string $string        String to save
- * @param string $filename      Output filename without extension
- * @param string $fileExtension File extension. Default is '.dat'
+ * @param string    $message Message for User what he must type
+ * @param int|float $default Default number for empty input. Default is 0
  *
- * @see generateRandomNumbers()
+ * @return float Inserted number
  */
-function saveStringToFile($string, $filename, $fileExtension = '.dat')
+function getNumberInput($message, $default = 0)
 {
-    // Create dir if not exists
-    if (!is_dir(dirname($filename))) {
-        text\debug('Creating missing directory: '.dirname($filename));
-        mkdir(dirname($filename));
-    }
+    echo $message.' [Default: '.$default.']: ';
 
-    // Warn about overwriting file
-    if (file_exists($filename.$fileExtension)) {
-        text\text('File '.$filename.$fileExtension.' exists and it will be overwritten!');
-        getUserConfirm(true);
-    }
+    do {
+        $input = trim(fgets(STDIN));
+        Text\debug('User input: '.$input);
 
-    text\text('Saving to file...');
+        if (is_null($input) || empty($input)) {
+            Text\debug('Using default input: '.$default);
+            $input = $default;
+        } elseif (!is_numeric($input)) {
+            echo 'Please input number: ';
+        }
+    } while (!is_numeric($input));
 
-    $outputFileBytes = file_put_contents($filename.$fileExtension, $string, LOCK_EX);
-
-    text\text('Output file '.$filename.$fileExtension.' generated with '.$outputFileBytes.' bytes.');
+    return (float) $input;
 }
 
 /**
@@ -54,7 +49,7 @@ function getFilenameInput($message)
 
     do {
         $input = trim(fgets(STDIN));
-        text\debug('User input: '.$input);
+        Text\debug('User input: '.$input);
 
         /*
          * TODO: Invalid characters:
@@ -100,17 +95,3 @@ function getUserConfirm($die = false)
     // Fix missing return statement warning. Return true...
     return true;
 }
-
-/**
- * Prints how much time took some action in milliseconds.
- *
- * @param float $startTime Time when action started
- */
-function printEndTime($startTime)
-{
-    $endTime = microtime(true) - (float) $startTime;
-    $endTime = number_format((float) $endTime, 4, '.', '');
-
-    text\text('It was done in '.$endTime.' ms.');
-}
-

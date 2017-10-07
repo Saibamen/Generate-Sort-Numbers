@@ -5,14 +5,11 @@
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
  */
 
-namespace generate_sort_numbers\generateinc;
+namespace Generateinc;
 
-use generate_sort_numbers\console;
-use generate_sort_numbers\text;
+use Text;
 
-/** Functions for inputs, saving file and printing text */
-require_once 'console.inc.php';
-require_once 'text.php';
+require_once 'Text.php';
 
 /**
  * Generate string with randomized numbers.
@@ -25,8 +22,8 @@ require_once 'text.php';
  */
 function generateRandomNumbers($min, $max, $decimalPlaces)
 {
-    text\text('GENERATING...');
-    text\debug("Generating string.\nMin: ".$min.' Max: '.$max.' Decimal places: '.$decimalPlaces);
+    Text\message('GENERATING...');
+    Text\debug("Generating string.\nMin: ".$min.' Max: '.$max.' Decimal places: '.$decimalPlaces);
 
     $range = $max - $min;
     $outputString = '';
@@ -46,38 +43,11 @@ function generateRandomNumbers($min, $max, $decimalPlaces)
         $outputString .= $number.' ';
     }
 
-    console\printEndTime($GENERATE_START);
-    text\debug($outputString);
+    Text\printEndTime($GENERATE_START);
+    Text\debug($outputString);
 
     // Remove last space
     return trim($outputString);
-}
-
-/**
- * Get number from User.
- *
- * @param string    $message Message for User what he must type
- * @param int|float $default Default number for empty input. Default is 0
- *
- * @return float Inserted number
- */
-function getNumberInput($message, $default = 0)
-{
-    echo $message.' [Default: '.$default.']: ';
-
-    do {
-        $input = trim(fgets(STDIN));
-        text\debug('User input: '.$input);
-
-        if (is_null($input) || empty($input)) {
-            text\debug('Using default input: '.$default);
-            $input = $default;
-        } elseif (!is_numeric($input)) {
-            echo 'Please input number: ';
-        }
-    } while (!is_numeric($input));
-
-    return (float) $input;
 }
 
 /**
@@ -91,15 +61,15 @@ function getNumberInput($message, $default = 0)
 function checkSwitchMinMax($min, $max)
 {
     if ($min > $max) {
-        text\debug('!! Switching min and max !!');
+        Text\debug('!! Switching min and max !!');
 
         $tempMin = $min;
 
         $min = $max;
         $max = $tempMin;
 
-        text\debug('Min: '.$min);
-        text\debug('Max: '.$max);
+        Text\debug('Min: '.$min);
+        Text\debug('Max: '.$max);
     }
 
     return array('min' => $min, 'max' => $max);
