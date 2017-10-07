@@ -5,8 +5,14 @@
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
  */
 
+namespace generate_sort_numbers\generateinc;
+
+use generate_sort_numbers\console;
+use generate_sort_numbers\text;
+
 /** Functions for inputs, saving file and printing text */
 require_once 'console.inc.php';
+require_once 'text.php';
 
 /**
  * Generate string with randomized numbers.
@@ -19,8 +25,8 @@ require_once 'console.inc.php';
  */
 function generateRandomNumbers($min, $max, $decimalPlaces)
 {
-    text('GENERATING...');
-    debug("Generating string.\nMin: ".$min.' Max: '.$max.' Decimal places: '.$decimalPlaces);
+    text\text('GENERATING...');
+    text\debug("Generating string.\nMin: ".$min.' Max: '.$max.' Decimal places: '.$decimalPlaces);
 
     $range = $max - $min;
     $outputString = '';
@@ -40,8 +46,8 @@ function generateRandomNumbers($min, $max, $decimalPlaces)
         $outputString .= $number.' ';
     }
 
-    printEndTime($GENERATE_START);
-    debug($outputString);
+    console\printEndTime($GENERATE_START);
+    text\debug($outputString);
 
     // Remove last space
     return trim($outputString);
@@ -61,10 +67,10 @@ function getNumberInput($message, $default = 0)
 
     do {
         $input = trim(fgets(STDIN));
-        debug('User input: '.$input);
+        text\debug('User input: '.$input);
 
         if (is_null($input) || empty($input)) {
-            debug('Using default input: '.$default);
+            text\debug('Using default input: '.$default);
             $input = $default;
         } elseif (!is_numeric($input)) {
             echo 'Please input number: ';

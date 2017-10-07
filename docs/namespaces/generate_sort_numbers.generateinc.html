@@ -21,55 +21,7 @@
     <script src="../js/jquery.smooth-scroll.js"></script>
     <script src="../js/prism.min.js"></script>
     <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
-        <script type="text/javascript">
-        function loadExternalCodeSnippets() {
-            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-                var src = pre.getAttribute('data-src');
-                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
-                var language = 'php';
-
-                var code = document.createElement('code');
-                code.className = 'language-' + language;
-
-                pre.textContent = '';
-
-                code.textContent = 'Loading…';
-
-                pre.appendChild(code);
-
-                var xhr = new XMLHttpRequest();
-
-                xhr.open('GET', src, true);
-
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4) {
-
-                        if (xhr.status < 400 && xhr.responseText) {
-                            code.textContent = xhr.responseText;
-
-                            Prism.highlightElement(code);
-                        }
-                        else if (xhr.status >= 400) {
-                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
-                        }
-                        else {
-                            code.textContent = '✖ Error: File does not exist or is empty';
-                        }
-                    }
-                };
-
-                xhr.send(null);
-            });
-        }
-
-        $(document).ready(function(){
-            loadExternalCodeSnippets();
-        });
-        $('#source-view').on('shown', function () {
-            loadExternalCodeSnippets();
-        })
-    </script>
-
+    
     <link rel="shortcut icon" href="../images/favicon.ico"/>
     <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
     <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
@@ -144,19 +96,19 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1148761825"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-327289718"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1148761825" class="accordion-body collapse in">
+            <div id="namespace-327289718" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-916361152"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1147920055"></a>
                                 <a href="../namespaces/generate_sort_numbers.html" style="margin-left: 30px; padding-left: 0">generate_sort_numbers</a>
             </div>
-            <div id="namespace-916361152" class="accordion-body collapse ">
+            <div id="namespace-1147920055" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
@@ -164,7 +116,7 @@
             <div class="accordion-heading">
                                 <a href="../namespaces/generate_sort_numbers.console.html" style="margin-left: 30px; padding-left: 0">console</a>
             </div>
-            <div id="namespace-1939498373" class="accordion-body collapse ">
+            <div id="namespace-1970328913" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -180,7 +132,7 @@
             <div class="accordion-heading">
                                 <a href="../namespaces/generate_sort_numbers.generateinc.html" style="margin-left: 30px; padding-left: 0">generateinc</a>
             </div>
-            <div id="namespace-602620751" class="accordion-body collapse ">
+            <div id="namespace-278298406" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -196,7 +148,7 @@
             <div class="accordion-heading">
                                 <a href="../namespaces/generate_sort_numbers.text.html" style="margin-left: 30px; padding-left: 0">text</a>
             </div>
-            <div id="namespace-1810314972" class="accordion-body collapse ">
+            <div id="namespace-1694859115" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -228,37 +180,34 @@
     <section class="row-fluid">
         <div class="span10 offset2">
             <div class="row-fluid">
-                <div class="span8 content file">
+                <div class="span8 content namespace">
                     <nav>
-                                                                    </nav>
+                                                <a href="../namespaces/generate_sort_numbers.html">\generate_sort_numbers</a>
+                                            </nav>
+                    <h1><small>\generate_sort_numbers</small>generateinc</h1>
 
-                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
-                    <h1><small></small>console.inc.php</h1>
-                    <p><em></em></p>
                     
-
                     
                     
                                     </div>
 
                 <aside class="span4 detailsbar">
                     <dl>
-                                                    <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">\Default</div></dd>
-                        
-                        
+                        <dt>Namespace hierarchy</dt>
+                        <dd class="hierarchy">
+                                                                                                                                                                                                                                                                                                                                                                                                            
+                                    <div class="namespace-wrapper"><a href="../namespaces/default.html">\</a></div>
+                                                            
+                                    <div class="namespace-wrapper"><a href="../namespaces/generate_sort_numbers.html">\generate_sort_numbers</a></div>
+                                                                                        <div class="namespace-wrapper">\generate_sort_numbers\generateinc</div>
+                        </dd>
                     </dl>
-                    <h2>Tags</h2>
-                    <table class="table table-condensed">
-                                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                                            </table>
-
                 </aside>
             </div>
 
             
                         <div class="row-fluid">
-                <section class="span8 content file">
+                <section class="span8 content namespace">
                     <h2>Functions</h2>
                 </section>
                 <aside class="span4 detailsbar"></aside>
@@ -266,45 +215,40 @@
 
                                         <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_saveStringToFile" name="method_saveStringToFile" class="anchor"></a>
+            <a id="method_checkSwitchMinMax" name="method_checkSwitchMinMax" class="anchor"></a>
             <article class="method">
-                <h3 class=" ">saveStringToFile()</h3>
+                <h3 class=" ">checkSwitchMinMax()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">saveStringToFile(string  <span class="argument">$string</span>, string  <span class="argument">$filename</span>, string  <span class="argument">$fileExtension = &#039;.dat&#039;</span>) </pre>
-                <p><em>Saves string to file.</em></p>
+                <pre class="signature" style="margin-right: 54px;">checkSwitchMinMax(float  <span class="argument">$min</span>, float  <span class="argument">$max</span>) : array</pre>
+                <p><em>Switch min and max if min &gt; max.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>string</td>
-                                <td>$string </td>
-                                <td><p>String to save</p></td>
+                                <td>float</td>
+                                <td>$min </td>
+                                <td><p>Minimum</p></td>
                             </tr>
                                                     <tr>
-                                <td>string</td>
-                                <td>$filename </td>
-                                <td><p>Output filename without extension</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string</td>
-                                <td>$fileExtension </td>
-                                <td><p>File extension. Default is '.dat'</p></td>
+                                <td>float</td>
+                                <td>$max </td>
+                                <td><p>Maximum</p></td>
                             </tr>
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    array
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                    <dt>File</dt>
-                    <dd><a href=""><div class="path-wrapper">console.inc.php</div></a></dd>
-                                                                                            <dt>See also</dt>
-                                                                <dd><a href=""><span class="namespace-wrapper">\generateRandomNumbers()</span></a></dd>
-                                                                </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href=""><div class="path-wrapper"></div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr>
@@ -321,12 +265,68 @@
 
                                         <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_getFilenameInput" name="method_getFilenameInput" class="anchor"></a>
+            <a id="method_generateRandomNumbers" name="method_generateRandomNumbers" class="anchor"></a>
             <article class="method">
-                <h3 class=" ">getFilenameInput()</h3>
+                <h3 class=" ">generateRandomNumbers()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getFilenameInput(string  <span class="argument">$message</span>) : string</pre>
-                <p><em>Get filename from User.</em></p>
+                <pre class="signature" style="margin-right: 54px;">generateRandomNumbers(integer|float  <span class="argument">$min</span>, integer|float  <span class="argument">$max</span>, integer|float  <span class="argument">$decimalPlaces</span>) : string</pre>
+                <p><em>Generate string with randomized numbers.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer|float</td>
+                                <td>$min </td>
+                                <td><p>Minimum allowed number to generate</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer|float</td>
+                                <td>$max </td>
+                                <td><p>Maximum allowed number to generate</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer|float</td>
+                                <td>$decimalPlaces </td>
+                                <td><p>Number of decimal places</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>Generated string without trailing spaces</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href=""><div class="path-wrapper"></div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            package
+                        </th>
+                        <td>
+                                                                                            <p>Default</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                        <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getNumberInput" name="method_getNumberInput" class="anchor"></a>
+            <article class="method">
+                <h3 class=" ">getNumberInput()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getNumberInput(string  <span class="argument">$message</span>, integer|float  <span class="argument">$default</span>) : float</pre>
+                <p><em>Get number from User.</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -336,110 +336,26 @@
                                 <td>$message </td>
                                 <td><p>Message for User what he must type</p></td>
                             </tr>
+                                                    <tr>
+                                <td>integer|float</td>
+                                <td>$default </td>
+                                <td><p>Default number for empty input. Default is 0</p></td>
+                            </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    string
-                                            &mdash; <p>Inserted filename</p>
+                    float
+                                            &mdash; <p>Inserted number</p>
                                     				
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                    <dt>File</dt>
-                    <dd><a href=""><div class="path-wrapper">console.inc.php</div></a></dd>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            package
-                        </th>
-                        <td>
-                                                                                            <p>Default</p>
-                                                    </td>
-                    </tr>
-                            </table>
-        </aside>
-    </div>
-
-                                        <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_getUserConfirm" name="method_getUserConfirm" class="anchor"></a>
-            <article class="method">
-                <h3 class=" ">getUserConfirm()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getUserConfirm(boolean  <span class="argument">$die = false</span>) : boolean</pre>
-                <p><em>Get User confirmation. Default is YES.</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>boolean</td>
-                                <td>$die </td>
-                                <td><p>If true - script dies if User denial</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    boolean
-                                            &mdash; <p>Confirmation result</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                    <dt>File</dt>
-                    <dd><a href=""><div class="path-wrapper">console.inc.php</div></a></dd>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            package
-                        </th>
-                        <td>
-                                                                                            <p>Default</p>
-                                                    </td>
-                    </tr>
-                            </table>
-        </aside>
-    </div>
-
-                                        <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_printEndTime" name="method_printEndTime" class="anchor"></a>
-            <article class="method">
-                <h3 class=" ">printEndTime()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">printEndTime(float  <span class="argument">$startTime</span>) </pre>
-                <p><em>Prints how much time took some action in milliseconds.</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>float</td>
-                                <td>$startTime </td>
-                                <td><p>Time when action started</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                    <dt>File</dt>
-                    <dd><a href=""><div class="path-wrapper">console.inc.php</div></a></dd>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href=""><div class="path-wrapper"></div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr>
@@ -457,16 +373,6 @@
                             
         </div>
     </section>
-
-    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label"></h3>
-        </div>
-        <div class="modal-body">
-            <pre data-src="../files/console.inc.php.txt" class="language-php line-numbers"></pre>
-        </div>
-    </div>
 
     <footer class="row-fluid">
         <section class="span10 offset2">
@@ -505,7 +411,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on October 7th, 2017 at 03:05.
+                    on October 7th, 2017 at 03:04.
                 </section>
             </section>
         </section>

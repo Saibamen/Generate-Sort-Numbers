@@ -1,9 +1,14 @@
 <?php
+namespace generate_sort_numbers\console;
 /**
  * Functions for console scripts.
  *
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
  */
+
+use generate_sort_numbers\text;
+
+require_once 'text.php';
 
 /**
  * Saves string to file.
@@ -18,21 +23,21 @@ function saveStringToFile($string, $filename, $fileExtension = '.dat')
 {
     // Create dir if not exists
     if (!is_dir(dirname($filename))) {
-        debug('Creating missing directory: '.dirname($filename));
+        text\debug('Creating missing directory: '.dirname($filename));
         mkdir(dirname($filename));
     }
 
     // Warn about overwriting file
     if (file_exists($filename.$fileExtension)) {
-        text('File '.$filename.$fileExtension.' exists and it will be overwritten!');
+        text\text('File '.$filename.$fileExtension.' exists and it will be overwritten!');
         getUserConfirm(true);
     }
 
-    text('Saving to file...');
+    text\text('Saving to file...');
 
     $outputFileBytes = file_put_contents($filename.$fileExtension, $string, LOCK_EX);
 
-    text('Output file '.$filename.$fileExtension.' generated with '.$outputFileBytes.' bytes.');
+    text\text('Output file '.$filename.$fileExtension.' generated with '.$outputFileBytes.' bytes.');
 }
 
 /**
@@ -48,7 +53,7 @@ function getFilenameInput($message)
 
     do {
         $input = trim(fgets(STDIN));
-        debug('User input: '.$input);
+        text\debug('User input: '.$input);
 
         /*
          * TODO: Invalid characters:
@@ -105,7 +110,7 @@ function printEndTime($startTime)
     $endTime = microtime(true) - (float) $startTime;
     $endTime = number_format((float) $endTime, 4, '.', '');
 
-    text('It was done in '.$endTime.' ms.');
+    text\text('It was done in '.$endTime.' ms.');
 }
 
 /**
@@ -117,19 +122,19 @@ function printEndTime($startTime)
  *
  * @see text()
  */
-function debug($message)
+/*function debug($message)
 {
     if (DEBUG) {
         text($message);
     }
-}
+}*/
 
 /**
  * Prints message with new lines.
  *
  * @param mixed $message Message to print
  */
-function text($message)
+/*function text($message)
 {
     echo "\n".$message."\n";
-}
+}*/
