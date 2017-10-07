@@ -14,10 +14,10 @@ namespace Includes\Text;
  */
 function printTimeDuration($startTime)
 {
+    $currentTime = microtime(true);
+
     if (gettype($startTime) === 'string') {
         $currentTime = microtime();
-    } else {
-        $currentTime = microtime(true);
     }
 
     $completedIn = (float) $currentTime - (float) $startTime;
