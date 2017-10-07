@@ -9,7 +9,7 @@ namespace generate_sort_numbers\text;
  *
  * @param mixed $message Message to print if in DEBUG mode
  *
- * @see generate_sort_numbers\text\text()
+ * @see text()
  */
 function debug($message)
 {

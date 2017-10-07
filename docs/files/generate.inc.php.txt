@@ -91,15 +91,15 @@ function getNumberInput($message, $default = 0)
 function checkSwitchMinMax($min, $max)
 {
     if ($min > $max) {
-        debug('!! Switching min and max !!');
+        text\debug('!! Switching min and max !!');
 
         $tempMin = $min;
 
         $min = $max;
         $max = $tempMin;
 
-        debug('Min: '.$min);
-        debug('Max: '.$max);
+        text\debug('Min: '.$min);
+        text\debug('Max: '.$max);
     }
 
     return array('min' => $min, 'max' => $max);
