@@ -5,9 +5,9 @@
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
  */
 
-namespace Input;
+namespace Includes\Input;
 
-use Text;
+use Includes\Text;
 
 /**
  * Get number from User.
@@ -95,3 +95,4 @@ function getUserConfirm($die = false)
     // Fix missing return statement warning. Return true...
     return true;
 }
+

@@ -5,10 +5,10 @@
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
  */
 
-namespace File;
+namespace Includes\File;
 
-use Input;
-use Text;
+use Includes\Input;
+use Includes\Text;
 
 /**
  * Saves string to file.
@@ -17,7 +17,7 @@ use Text;
  * @param string $filename      Output filename without extension
  * @param string $fileExtension File extension. Default is '.dat'
  *
- * @see \Generateinc\generateRandomNumbers()
+ * @see \Includes\Generate\generateRandomNumbers()
  */
 function saveStringToFile($string, $filename, $fileExtension = '.dat')
 {

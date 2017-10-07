@@ -5,9 +5,9 @@
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
  */
 
-namespace Generateinc;
+namespace Includes\Generate;
 
-use Text;
+use Includes\Text;
 
 require_once 'Text.php';
 
@@ -74,3 +74,4 @@ function checkSwitchMinMax($min, $max)
 
     return array('min' => $min, 'max' => $max);
 }
+

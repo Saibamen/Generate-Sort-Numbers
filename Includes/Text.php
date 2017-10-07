@@ -5,7 +5,7 @@
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
  */
 
-namespace Text;
+namespace Includes\Text;
 
 /**
  * Prints how much time took some action in milliseconds.
@@ -27,7 +27,7 @@ function printEndTime($startTime)
  *
  * @param mixed $message Message to print if in DEBUG mode
  *
- * @see \Text\message()
+ * @see \Includes\Text\message()
  */
 function debug($message)
 {
@@ -45,4 +45,3 @@ function message($message)
 {
     echo "\n".$message."\n";
 }
-

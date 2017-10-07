@@ -10,13 +10,13 @@
 
 namespace Generate;
 
-use File;
-use Generateinc;
-use Input;
+use Includes\File;
+use Includes\Generate;
+use Includes\Input;
 
-require_once 'generate.inc.php';
-require_once 'Input.php';
-require_once 'File.php';
+require_once 'Includes\Generate.php';
+require_once 'Includes\Input.php';
+require_once 'Includes\File.php';
 
 // Run only in CLI
 if (php_sapi_name() !== 'cli') {
@@ -36,7 +36,7 @@ $min = Input\getNumberInput('Type minimum allowed number');
 $max = Input\getNumberInput('Type maximum allowed number', 10);
 
 // Switch min and max if min > max
-$minMax = Generateinc\checkSwitchMinMax($min, $max);
+$minMax = Generate\checkSwitchMinMax($min, $max);
 
 $min = $minMax['min'];
 $max = $minMax['max'];
@@ -47,6 +47,6 @@ $decimalPlaces = Input\getNumberInput('Type number of decimal places');
 
 $filename = Input\getFilenameInput('Type output filename (without extension)');
 
-$outputString = Generateinc\generateRandomNumbers($min, $max, $decimalPlaces);
+$outputString = Generate\generateRandomNumbers($min, $max, $decimalPlaces);
 
 File\saveStringToFile($outputString, $filename);
