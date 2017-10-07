@@ -7,12 +7,12 @@
 
 namespace generate_sort_numbers\generateinc;
 
+use generate_sort_numbers\console;
+use generate_sort_numbers\text;
+
 /** Functions for inputs, saving file and printing text */
 require_once 'console.inc.php';
 require_once 'text.php';
-
-use generate_sort_numbers\console;
-use generate_sort_numbers\text;
 
 /**
  * Generate string with randomized numbers.
