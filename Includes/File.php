@@ -7,7 +7,7 @@
 
 namespace Includes\File;
 
-use \Includes\Input;
+use Includes\Input;
 use Includes\Text;
 
 /**
