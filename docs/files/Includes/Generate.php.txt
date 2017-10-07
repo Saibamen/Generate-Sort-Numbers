@@ -29,7 +29,7 @@ function generateRandomNumbers($min, $max, $decimalPlaces)
     $outputString = '';
     $howManyIterations = 100;
 
-    $GENERATE_START = microtime(true);
+    $generateStart = microtime(true);
 
     // TODO: Show percent progress based on iteration
     // TODO: Calculate output size for generate
@@ -43,7 +43,7 @@ function generateRandomNumbers($min, $max, $decimalPlaces)
         $outputString .= $number.' ';
     }
 
-    Text\printEndTime($GENERATE_START);
+    Text\printEndTime($generateStart);
     Text\debug($outputString);
 
     // Remove last space

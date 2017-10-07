@@ -30,7 +30,7 @@ function saveStringToFile($string, $filename, $fileExtension = '.dat')
     // Warn about overwriting file
     if (file_exists($filename.$fileExtension)) {
         Text\message('File '.$filename.$fileExtension.' exists and it will be overwritten!');
-        Input\getUserConfirm(true);
+        Input\dieOnDenyUserConfirm();
     }
 
     text\message('Saving to file...');

@@ -67,13 +67,21 @@ function getFilenameInput($message)
 }
 
 /**
+ * Terminate script if User denied on confirmation.
+ */
+function dieOnDenyUserConfirm()
+{
+    if (!getUserConfirm()) {
+        die('Script terminated by user.');
+    }
+}
+
+/**
  * Get User confirmation. Default is YES.
- *
- * @param bool $die If true - script dies if User denial
  *
  * @return bool Confirmation result
  */
-function getUserConfirm($die = false)
+function getUserConfirm()
 {
     while (1) {
         echo 'Do you really want to continue? [Y/n]: ';
@@ -84,10 +92,6 @@ function getUserConfirm($die = false)
         if (is_null($input) || empty($input) || strtolower($input) == 'y' || strtolower($input) == 'yes') {
             return true;
         } elseif (strtolower($input) == 'n' || strtolower($input) == 'no') {
-            if ($die) {
-                die('Script terminated by user.');
-            }
-
             return false;
         }
     }

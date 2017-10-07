@@ -10,14 +10,20 @@ namespace Includes\Text;
 /**
  * Prints how much time took some action in milliseconds.
  *
- * @param float $startTime Time when action started
+ * @param float|string $startTime Time when action started
  */
-function printEndTime($startTime)
+function printTimeDuration($startTime)
 {
-    $endTime = microtime(true) - (float) $startTime;
-    $endTime = number_format((float) $endTime, 4, '.', '');
+    if (gettype($startTime) === 'string') {
+        $currentTime = microtime();
+    } else {
+        $currentTime = microtime(true);
+    }
 
-    message('It was done in '.$endTime.' ms.');
+    $completedIn = (float) $currentTime - (float) $startTime;
+    $completedIn = number_format((float) $completedIn, 4, '.', '');
+
+    message('It was done in '.$completedIn.' ms.');
 }
 
 /**
