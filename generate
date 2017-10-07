@@ -9,6 +9,8 @@ namespace generate_sort_numbers\generate;
  *
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
  */
+require_once 'generate.inc.php';
+
 use generate_sort_numbers\console;
 use generate_sort_numbers\generateinc;
 
@@ -25,8 +27,6 @@ if (php_sapi_name() !== 'cli') {
  * @todo Read from console arguments
  */
 define('DEBUG', true);
-
-require_once 'generate.inc.php';
 
 $min = generateinc\getNumberInput('Type minimum allowed number');
 $max = generateinc\getNumberInput('Type maximum allowed number', 10);

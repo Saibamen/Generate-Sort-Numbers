@@ -7,9 +7,9 @@ namespace generate_sort_numbers\console;
  *
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
  */
-use generate_sort_numbers\text;
-
 require_once 'text.php';
+
+use generate_sort_numbers\text;
 
 /**
  * Saves string to file.
