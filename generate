@@ -9,6 +9,7 @@ namespace generate_sort_numbers\generate;
  *
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
  */
+use generate_sort_numbers\console;
 use generate_sort_numbers\generateinc;
 
 // Run only in CLI
