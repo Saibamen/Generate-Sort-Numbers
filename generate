@@ -8,6 +8,16 @@
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
  */
 
+namespace Generate;
+
+use Includes\File;
+use Includes\Generate;
+use Includes\Input;
+
+require_once 'Includes/Generate.php';
+require_once 'Includes/Input.php';
+require_once 'Includes/File.php';
+
 // Run only in CLI
 if (php_sapi_name() !== 'cli') {
     exit('This is console app. Please run it in console (CLI)!');
@@ -22,23 +32,21 @@ if (php_sapi_name() !== 'cli') {
  */
 define('DEBUG', true);
 
-require_once 'generate.inc.php';
-
-$min = getNumberInput('Type minimum allowed number');
-$max = getNumberInput('Type maximum allowed number', 10);
+$min = Input\getNumberInput('Type minimum allowed number');
+$max = Input\getNumberInput('Type maximum allowed number', 10);
 
 // Switch min and max if min > max
-$minMax = checkSwitchMinMax($min, $max);
+$minMax = Generate\checkSwitchMinMax($min, $max);
 
 $min = $minMax['min'];
 $max = $minMax['max'];
 
-$decimalPlaces = getNumberInput('Type number of decimal places');
+$decimalPlaces = Input\getNumberInput('Type number of decimal places');
 
 // TODO: File size to generate
 
-$filename = getFilenameInput('Type output filename (without extension)');
+$filename = Input\getFilenameInput('Type output filename (without extension)');
 
-$outputString = generateRandomNumbers($min, $max, $decimalPlaces);
+$outputString = Generate\generateRandomNumbers($min, $max, $decimalPlaces);
 
-saveStringToFile($outputString, $filename);
+File\saveStringToFile($outputString, $filename);

@@ -21,55 +21,7 @@
     <script src="../js/jquery.smooth-scroll.js"></script>
     <script src="../js/prism.min.js"></script>
     <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
-        <script type="text/javascript">
-        function loadExternalCodeSnippets() {
-            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-                var src = pre.getAttribute('data-src');
-                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
-                var language = 'php';
-
-                var code = document.createElement('code');
-                code.className = 'language-' + language;
-
-                pre.textContent = '';
-
-                code.textContent = 'Loading…';
-
-                pre.appendChild(code);
-
-                var xhr = new XMLHttpRequest();
-
-                xhr.open('GET', src, true);
-
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4) {
-
-                        if (xhr.status < 400 && xhr.responseText) {
-                            code.textContent = xhr.responseText;
-
-                            Prism.highlightElement(code);
-                        }
-                        else if (xhr.status >= 400) {
-                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
-                        }
-                        else {
-                            code.textContent = '✖ Error: File does not exist or is empty';
-                        }
-                    }
-                };
-
-                xhr.send(null);
-            });
-        }
-
-        $(document).ready(function(){
-            loadExternalCodeSnippets();
-        });
-        $('#source-view').on('shown', function () {
-            loadExternalCodeSnippets();
-        })
-    </script>
-
+    
     <link rel="shortcut icon" href="../images/favicon.ico"/>
     <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
     <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
@@ -144,19 +96,19 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1439231159"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1828376919"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1439231159" class="accordion-body collapse in">
+            <div id="namespace-1828376919" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-318439002"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1177606565"></a>
                                 <a href="../namespaces/Includes.html" style="margin-left: 30px; padding-left: 0">Includes</a>
             </div>
-            <div id="namespace-318439002" class="accordion-body collapse ">
+            <div id="namespace-1177606565" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
@@ -164,7 +116,7 @@
             <div class="accordion-heading">
                                 <a href="../namespaces/Includes.File.html" style="margin-left: 30px; padding-left: 0">File</a>
             </div>
-            <div id="namespace-436968163" class="accordion-body collapse ">
+            <div id="namespace-1367164101" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -180,7 +132,7 @@
             <div class="accordion-heading">
                                 <a href="../namespaces/Includes.Generate.html" style="margin-left: 30px; padding-left: 0">Generate</a>
             </div>
-            <div id="namespace-581805054" class="accordion-body collapse ">
+            <div id="namespace-1047403298" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -196,7 +148,7 @@
             <div class="accordion-heading">
                                 <a href="../namespaces/Includes.Input.html" style="margin-left: 30px; padding-left: 0">Input</a>
             </div>
-            <div id="namespace-1000751345" class="accordion-body collapse ">
+            <div id="namespace-1007583489" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -212,7 +164,7 @@
             <div class="accordion-heading">
                                 <a href="../namespaces/Includes.Text.html" style="margin-left: 30px; padding-left: 0">Text</a>
             </div>
-            <div id="namespace-827030658" class="accordion-body collapse ">
+            <div id="namespace-1093357767" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -244,80 +196,88 @@
     <section class="row-fluid">
         <div class="span10 offset2">
             <div class="row-fluid">
-                <div class="span8 content file">
+                <div class="span8 content namespace">
                     <nav>
-                                                                    </nav>
+                                                <a href="../namespaces/Includes.html">\Includes</a>
+                                            </nav>
+                    <h1><small>\Includes</small>File</h1>
 
-                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
-                    <h1><small></small>generate</h1>
-                    <p><em>Generate script.</em></p>
-                    <p>Generates file with randomized floating numbers.</p>
-
+                    
                     
                     
                                     </div>
 
                 <aside class="span4 detailsbar">
                     <dl>
-                                                    <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">\Default</div></dd>
-                        
-                        
+                        <dt>Namespace hierarchy</dt>
+                        <dd class="hierarchy">
+                                                                                                                                                                                                                                                                                                                                                                                                            
+                                    <div class="namespace-wrapper"><a href="../namespaces/default.html">\</a></div>
+                                                            
+                                    <div class="namespace-wrapper"><a href="../namespaces/Includes.html">\Includes</a></div>
+                                                                                        <div class="namespace-wrapper">\Includes\File</div>
+                        </dd>
                     </dl>
-                    <h2>Tags</h2>
-                    <table class="table table-condensed">
-                                                    <tr>
-                                <th>
-                                    author
-                                </th>
-                                <td>
-                                                                            <p>Adam &quot;Saibamen&quot; Stachowicz <a href="mailto:saibamenppl@gmail.com">saibamenppl@gmail.com</a></p>
-                                                                    </td>
-                            </tr>
-                                            </table>
-
                 </aside>
             </div>
 
+            
                         <div class="row-fluid">
-                <section class="span8 content file">
-                    <h2>Constants</h2>
+                <section class="span8 content namespace">
+                    <h2>Functions</h2>
                 </section>
                 <aside class="span4 detailsbar"></aside>
             </div>
 
                                         <div class="row-fluid">
         <div class="span8 content class">
-            <a id="constant_DEBUG" name="constant_DEBUG" class="anchor"></a>
-            <article id="constant_DEBUG" class="constant">
-                <h3 class="">DEBUG</h3>
-                <pre class="signature">DEBUG</pre>
-                <p><em>If true - print more information.</em></p>
+            <a id="method_saveStringToFile" name="method_saveStringToFile" class="anchor"></a>
+            <article class="method">
+                <h3 class=" ">saveStringToFile()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">saveStringToFile(string  <span class="argument">$string</span>, string  <span class="argument">$filename</span>, string  <span class="argument">$fileExtension = &#039;.dat&#039;</span>) </pre>
+                <p><em>Saves string to file.</em></p>
                 
-            </article>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$string </td>
+                                <td><p>String to save</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$filename </td>
+                                <td><p>Output filename without extension</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$fileExtension </td>
+                                <td><p>File extension. Default is '.dat'</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                <dt>File</dt>
-                <dd><a href=""><div class="path-wrapper">generate</div></a></dd>
-                                                                            </dl>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href=""><div class="path-wrapper"></div></a></dd>
+                                                                            <dt>See also</dt>
+                                                                <dd><a href="../namespaces/Includes.Generate.html#function_generateRandomNumbers"><span class="namespace-wrapper">\Includes\Generate\generateRandomNumbers()</span></a></dd>
+                                                                </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            todo
-                        </th>
-                        <td>
-                                                            <p>Read from console arguments</p>
-                                                    </td>
-                    </tr>
                                     <tr>
                         <th>
                             package
                         </th>
                         <td>
-                                                            <p>Default</p>
+                                                                                            <p>Default</p>
                                                     </td>
                     </tr>
                             </table>
@@ -325,19 +285,8 @@
     </div>
 
                             
-            
         </div>
     </section>
-
-    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label"></h3>
-        </div>
-        <div class="modal-body">
-            <pre data-src="../files/generate.txt" class="language-php line-numbers"></pre>
-        </div>
-    </div>
 
     <footer class="row-fluid">
         <section class="span10 offset2">
