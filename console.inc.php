@@ -1,11 +1,12 @@
 <?php
+
 namespace generate_sort_numbers\console;
+
 /**
  * Functions for console scripts.
  *
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
  */
-
 use generate_sort_numbers\text;
 
 require_once 'text.php';
