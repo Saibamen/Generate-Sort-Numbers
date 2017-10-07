@@ -1,9 +1,10 @@
 <?php
 /**
- * Includes/Text.php
+ * Includes/Text.php.
  *
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
  * @license MIT
+ *
  * @link    https://github.com/Saibamen/Generate-Sort-Numbers
  */
 
@@ -39,7 +40,7 @@ class Text
     }
 
     /**
-     * Set $debugMode property value
+     * Set $debugMode property value.
      *
      * @param bool $value
      *
@@ -47,11 +48,11 @@ class Text
      */
     public static function setDebug($value)
     {
-        Text::$debugMode = $value;
+        self::$debugMode = $value;
     }
 
     /**
-     * Get $debugMode property value
+     * Get $debugMode property value.
      *
      * @return bool
      *
@@ -59,7 +60,7 @@ class Text
      */
     public static function getDebug()
     {
-        return Text::$debugMode;
+        return self::$debugMode;
     }
 
     /**
@@ -72,8 +73,8 @@ class Text
      */
     public static function debug($message)
     {
-        if (Text::$debugMode) {
-            Text::message($message);
+        if (self::$debugMode) {
+            self::message($message);
         }
     }
 

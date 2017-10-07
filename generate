@@ -6,6 +6,9 @@
  * Generates file with randomized floating numbers.
  *
  * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
+ * @license MIT
+ *
+ * @link    https://github.com/Saibamen/Generate-Sort-Numbers
  */
 
 namespace Generate;
@@ -24,24 +27,27 @@ if (php_sapi_name() !== 'cli') {
     exit('This is console app. Please run it in console (CLI)!');
 }
 
-// TODO: Read from console arguments
-Text::setDebug(true);
+// Check for -debug command
+if (isset($argv[1]) && $argv[1] === '-debug') {
+    Text::message('Debug mode. Have fun!');
+    Text::setDebug(true);
+}
 
-$min = Input\getNumberInput('Type minimum allowed number');
-$max = Input\getNumberInput('Type maximum allowed number', 10);
+$min = Input::getNumberInput('Type minimum allowed number');
+$max = Input::getNumberInput('Type maximum allowed number', 10);
 
 // Switch min and max if min > max
-$minMax = Generate\checkSwitchMinMax($min, $max);
+$minMax = Generate::checkSwitchMinMax($min, $max);
 
 $min = $minMax['min'];
 $max = $minMax['max'];
 
-$decimalPlaces = Input\getNumberInput('Type number of decimal places');
+$decimalPlaces = Input::getNumberInput('Type number of decimal places');
 
 // TODO: File size to generate
 
-$filename = Input\getFilenameInput('Type output filename (without extension)');
+$filename = Input::getFilenameInput('Type output filename (without extension)');
 
-$outputString = Generate\generateRandomNumbers($min, $max, $decimalPlaces);
+$outputString = Generate::generateRandomNumbers($min, $max, $decimalPlaces);
 
-File\saveStringToFile($outputString, $filename);
+File::saveStringToFile($outputString, $filename);
