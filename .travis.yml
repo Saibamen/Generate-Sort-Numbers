@@ -21,6 +21,7 @@ matrix:
 
 before_script:
   # Additional PHP config for increasing memory limit
+  # See http://blog.simplytestable.com/setting-the-php-memory-limit-for-travis-ci/
   - phpenv config-add travis.php.ini
 
 script:
