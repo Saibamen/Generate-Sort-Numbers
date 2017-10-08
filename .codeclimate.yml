@@ -17,6 +17,8 @@ engines:
         enabled: false
       CleanCode/StaticAccess:
         enabled: false
+      Naming/BooleanGetMethodName:
+        enabled: false
 ratings:
   paths:
   - "generate"
