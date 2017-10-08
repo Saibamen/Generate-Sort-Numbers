@@ -4,4 +4,4 @@
 50
 bla/
 bla\
-bla\valid_filename
+test/valid_filename

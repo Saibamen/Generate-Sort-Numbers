@@ -29,7 +29,7 @@ script:
   - php generate -debug < tests/generate_simple.txt
   - "[ -e test.dat ] && echo 'File test.dat exists' || (echo 'File test.dat not exists!!' && fake_command_to_stop_build)"
   - php generate -debug < tests/generate_invalid_filename.txt
-  - "[ -e bla/valid_filename.dat ] && echo 'File bla/valid_filename.dat exists' || (echo 'File bla/valid_filename.dat not exists!!' && fake_command_to_stop_build)"
+  - "[ -e test/valid_filename.dat ] && echo 'File test/valid_filename.dat exists' || (echo 'File test/valid_filename.dat not exists!!' && fake_command_to_stop_build)"
   - php generate -debug < tests/generate_directory.txt
   - "[ -e test/test.dat ] && echo 'File test/test.dat exists' || (echo 'File test/test.dat not exists!!' && fake_command_to_stop_build)"
   - php generate -debug < tests/generate_default_numbers.txt
@@ -47,7 +47,7 @@ script:
 
 after_script:
   - rm test.dat
-  - rm bla/valid_filename.dat
+  - rm test/valid_filename.dat
   - rm test/test.dat
   - rmdir test
   - rm default_numbers.dat
