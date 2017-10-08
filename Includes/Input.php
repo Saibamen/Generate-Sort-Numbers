@@ -28,7 +28,7 @@ class Input
         echo $message.' [Default: '.$default.']: ';
 
         do {
-            $input = trim(fgets(STDIN));
+            $input = trim(fgets(self::getSTDIN()));
 
             if (is_null($input) || empty($input)) {
                 Text::debug('Using default input: '.$default);
@@ -54,7 +54,7 @@ class Input
         echo $message.' [Default: '.$default.']: ';
 
         do {
-            $input = trim(fgets(STDIN));
+            $input = trim(fgets(self::getSTDIN()));
 
             /*
              * Invalid characters in files:
@@ -106,7 +106,7 @@ class Input
         while (1) {
             echo 'Do you really want to continue? [Y/n]: ';
 
-            $input = trim(fgets(STDIN));
+            $input = trim(fgets(self::getSTDIN()));
 
             // Default is YES
             if (is_null($input) || empty($input) || strtolower($input) == 'y' || strtolower($input) == 'yes') {
@@ -118,5 +118,17 @@ class Input
 
         // Fix missing return statement warning. Return true...
         return true;
+    }
+
+    /**
+     * Get STDIN for reading User input.
+     *
+     * This is fix for "STDIN of type string is incompatible with the type
+     * resource expected by parameter $handle of fgets()" warning
+     *
+     * @return resource
+     */
+    private static function getSTDIN() {
+        return fopen('php://stdin', 'r');
     }
 }
