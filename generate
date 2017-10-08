@@ -18,25 +18,29 @@ use Includes\Generate;
 use Includes\Input;
 use Includes\Text;
 
-require_once 'Includes/Generate.php';
-require_once 'Includes/Input.php';
-require_once 'Includes/File.php';
-
 // Run only in CLI
 if (php_sapi_name() !== 'cli') {
     exit('This is console app. Please run it in console (CLI)!');
 }
 
-// Check for -debug command
-if (isset($argv[1]) && $argv[1] === '-debug') {
-    Text::message('Debug mode. Have fun!');
-    Text::setDebug(true);
-}
+require_once 'Includes/Generate.php';
+require_once 'Includes/Input.php';
+require_once 'Includes/File.php';
 
-// Check for -testing command
-if (isset($argv[2]) && $argv[2] === '-testing') {
-    Text::message('Testing mode');
-    Generate::setTesting(true);
+// Check for console arguments
+if (count($argv) > 1) {
+    foreach ($argv as $arg) {
+        switch ($arg) {
+            case '-debug':
+                Text::message('Debug mode. Have fun!');
+                Text::setDebug(true);
+                break;
+            case '-testing':
+                Text::message('Testing mode');
+                Generate::setTesting(true);
+                break;
+        }
+    }
 }
 
 $min = Input::getNumberInput('Type minimum allowed number');
