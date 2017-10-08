@@ -129,6 +129,10 @@ class Input
      * @return resource
      */
     private static function getSTDIN() {
-        return fopen('php://stdin', 'r');
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            return fopen('php://stdin', 'r');
+        } else {
+            return fopen('/dev/stdin', 'r');
+        }
     }
 }
