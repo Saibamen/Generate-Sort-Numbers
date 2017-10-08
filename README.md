@@ -24,6 +24,12 @@ Run generate script and follow instructions:
 php generate
 ```
 
+If you want see more information, type:
+
+```
+php generate -debug
+```
+
 ### Generating documentation
 
 Update Composer and install [phpDocumentor](https://www.phpdoc.org/) from composer.json:

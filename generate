@@ -45,9 +45,9 @@ $max = $minMax['max'];
 $decimalPlaces = Input::getNumberInput('Type number of decimal places');
 
 // TODO: File size to generate
+$fileSize = (int) Input::getNumberInput('Type maximum file size (in bytes)', 123);
+
+$outputString = Generate::generateRandomNumbers($min, $max, $decimalPlaces, $fileSize);
 
 $filename = Input::getFilenameInput('Type output filename (without extension)');
-
-$outputString = Generate::generateRandomNumbers($min, $max, $decimalPlaces);
-
 File::saveStringToFile($outputString, $filename);

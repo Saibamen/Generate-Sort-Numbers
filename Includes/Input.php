@@ -29,7 +29,6 @@ class Input
 
         do {
             $input = trim(fgets(STDIN));
-            Text::debug('User input: '.$input);
 
             if (is_null($input) || empty($input)) {
                 Text::debug('Using default input: '.$default);
@@ -55,7 +54,6 @@ class Input
 
         do {
             $input = trim(fgets(STDIN));
-            Text::debug('User input: '.$input);
 
             /*
              * TODO: Invalid characters:
