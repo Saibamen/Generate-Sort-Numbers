@@ -128,7 +128,8 @@ class Input
      *
      * @return resource
      */
-    private static function getSTDIN() {
+    private static function getSTDIN()
+    {
         return fopen('php://stdin', 'r');
     }
 }
