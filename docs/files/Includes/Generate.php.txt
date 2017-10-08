@@ -28,26 +28,52 @@ class Generate
      * @param int|float $min           Minimum allowed number to generate
      * @param int|float $max           Maximum allowed number to generate
      * @param int|float $decimalPlaces Number of decimal places
+     * @param int       $maxFileSize   Maximum file size in bytes
      *
      * @return string Generated string without trailing spaces
      */
-    public static function generateRandomNumbers($min, $max, $decimalPlaces)
+    public static function generateRandomNumbers($min, $max, $decimalPlaces, $maxFileSize)
     {
-        Text::message('GENERATING...');
-        Text::debug("Generating string.\nMin: ".$min.' Max: '.$max.' Decimal places: '.$decimalPlaces);
-
         $range = $max - $min;
         $outputString = '';
-        $howManyIterations = 100;
+
+        $minMaxNumberSize = self::getMinMaxNumberSize($min, $max, $decimalPlaces);
+
+        if ($minMaxNumberSize['max'] > $maxFileSize) {
+            die('Error: Cannot generate any number due to too low file size.');
+        }
+
+        // Maximum iteration without spaces
+        $maximumIteration = (int) ($maxFileSize / $minMaxNumberSize['max']);
+        Text::debug('First maximum iteration: '.$maximumIteration);
+
+        $findingStart = microtime(true);
+
+        Text::message('Finding maximum iteration for loop...');
+
+        for ($i = 0; ; $i++) {
+            $tempMaxIteration = $maximumIteration - $i;
+            $maximumBytes = ($minMaxNumberSize['max'] * $tempMaxIteration) + $tempMaxIteration - 1;
+
+            if ($maxFileSize >= $maximumBytes) {
+                $maximumIteration = $tempMaxIteration;
+                Text::debug('Found right max iteration for loop');
+                break;
+            }
+        }
+
+        Text::printTimeDuration($findingStart);
+
+        Text::message('GENERATING...');
+        Text::debug('Min: '.$min.' Max: '.$max.' Decimal places: '.$decimalPlaces.' Size: '.$maxFileSize."\nMaximum iteration: ".$maximumIteration."\n");
 
         $generateStart = microtime(true);
 
-        // TODO: Show percent progress based on iteration
-        // TODO: Calculate output size for generate
-        for ($i = 0; $i <= $howManyIterations; $i++) {
+        for ($i = 1; $i <= $maximumIteration; $i++) {
             // Print progress and move cursor back to position 0
-            echo 'Progress: '.$i.'/'.$howManyIterations."\r";
+            echo 'Progress: '.$i.'/'.$maximumIteration."\r";
 
+            // Random number
             $number = $min + $range * (mt_rand() / mt_getrandmax());
             // Format with trailing zeros ie. 8.00
             $number = number_format((float) $number, (int) $decimalPlaces, '.', '');
@@ -55,10 +81,37 @@ class Generate
         }
 
         Text::printTimeDuration($generateStart);
-        Text::debug($outputString);
+        Text::debug('Output string has '.strlen(trim($outputString)).' bytes.');
 
         // Remove last space
         return trim($outputString);
+    }
+
+    /**
+     * Switch min and max if min > max.
+     *
+     * @param int|float $min           Minimum allowed number to generate
+     * @param int|float $max           Maximum allowed number to generate
+     * @param int|float $decimalPlaces Number of decimal places
+     *
+     * @return array
+     */
+    public static function getMinMaxNumberSize($min, $max, $decimalPlaces)
+    {
+        $additionalBytes = null;
+
+        if ((int) $decimalPlaces > 0) {
+            // + 1 for decimal point
+            $additionalBytes = (int) $decimalPlaces + 1;
+        }
+
+        $minimumNumberSize = min(strlen((int) $min), strlen((int) $max)) + $additionalBytes;
+        $maximumNumberSize = max(strlen((int) $min), strlen((int) $max)) + $additionalBytes;
+
+        Text::debug('Minimum number size: '.$minimumNumberSize);
+        Text::debug('Maximum number size: '.$maximumNumberSize);
+
+        return array('min' => $minimumNumberSize, 'max' => $maximumNumberSize);
     }
 
     /**
