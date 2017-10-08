@@ -69,11 +69,12 @@ class Text
      * @param mixed $message Message to print if in DEBUG mode
      *
      * @see Text::$debugMode
+     * @see Text::getDebug()
      * @see Text::message()
      */
     public static function debug($message)
     {
-        if (self::$debugMode) {
+        if (self::getDebug()) {
             self::message($message);
         }
     }

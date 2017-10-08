@@ -33,6 +33,12 @@ if (isset($argv[1]) && $argv[1] === '-debug') {
     Text::setDebug(true);
 }
 
+// Check for -testing command
+if (isset($argv[2]) && $argv[2] === '-testing') {
+    Text::message('Testing mode');
+    Generate::setTesting(true);
+}
+
 $min = Input::getNumberInput('Type minimum allowed number');
 $max = Input::getNumberInput('Type maximum allowed number', 10);
 
