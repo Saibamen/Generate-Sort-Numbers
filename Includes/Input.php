@@ -45,12 +45,13 @@ class Input
      * Get filename from User.
      *
      * @param string $message Message for User what he must type
+     * @param string $default Default filename for empty input. Default is 'output'
      *
      * @return string Inserted filename
      */
-    public static function getFilenameInput($message)
+    public static function getFilenameInput($message, $default = 'output')
     {
-        echo $message.': ';
+        echo $message.' [Default: '.$default.']: ';
 
         do {
             $input = trim(fgets(STDIN));
@@ -60,9 +61,12 @@ class Input
              * (Windows)    \/:*?"<>|   (check \ and / only at the end of string - need to test)
              * (Linux)      /
              */
-            $isInputWrong = is_null($input) || empty($input);
+            $isInputWrong = substr($input, -1) === '/';
 
-            if ($isInputWrong) {
+            if (is_null($input) || empty($input)) {
+                Text::debug('Using default input: '.$default);
+                $input = $default;
+            } elseif ($isInputWrong) {
                 echo 'Please input filename: ';
             }
         } while ($isInputWrong);
