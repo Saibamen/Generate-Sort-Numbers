@@ -23,6 +23,11 @@ require_once 'Text.php';
 class Generate
 {
     /**
+     * @var bool If true - print more information.
+     */
+    private static $testingMode = false;
+
+    /**
      * Generate string with randomized numbers.
      *
      * @param int|float $min           Minimum allowed number to generate
@@ -71,7 +76,9 @@ class Generate
 
         for ($i = 1; $i <= $maximumIteration; $i++) {
             // Print progress and move cursor back to position 0
-            echo 'Progress: '.$i.'/'.$maximumIteration."\r";
+            if (!self::getTesting()) {
+                echo 'Progress: '.$i.'/'.$maximumIteration."\r";
+            }
 
             // Random number
             $number = $min + $range * (mt_rand() / mt_getrandmax());
@@ -137,6 +144,30 @@ class Generate
         }
 
         return array('min' => $min, 'max' => $max);
+    }
+
+    /**
+     * Set $testingMode property value.
+     *
+     * @param bool $value
+     *
+     * @see Generate::$testingMode
+     */
+    public static function setTesting($value)
+    {
+        self::$testingMode = $value;
+    }
+
+    /**
+     * Get $testingMode property value.
+     *
+     * @return bool
+     *
+     * @see Generate::$testingMode
+     */
+    public static function getTesting()
+    {
+        return self::$testingMode;
     }
 }
 

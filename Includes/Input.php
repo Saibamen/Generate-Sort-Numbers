@@ -42,7 +42,7 @@ class Input
     }
 
     /**
-     * Get filename from User.
+     * Get valid filename from User.
      *
      * @param string $message Message for User what he must type
      * @param string $default Default filename for empty input. Default is 'output'
@@ -57,17 +57,27 @@ class Input
             $input = trim(fgets(STDIN));
 
             /*
-             * TODO: Invalid characters:
-             * (Windows)    \/:*?"<>|   (check \ and / only at the end of string - need to test)
-             * (Linux)      /
+             * Invalid characters in files:
+             * (Windows)  \/:*?"<>|
+             * (Linux)    /
              */
-            $isInputWrong = substr($input, -1) === '/';
+
+            $lastCharacter = substr($input, -1);
+
+            // Only last character because / and \ are for folders
+            $isInputWrong = $lastCharacter === '/' || $lastCharacter === '\\';
+
+            // Running under Windows?
+            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+                // https://regex101.com/r/wR5d0J/2/
+                $isInputWrong = $isInputWrong || preg_match('/[:*?"<>|]/', $input);
+            }
 
             if (is_null($input) || empty($input)) {
                 Text::debug('Using default input: '.$default);
                 $input = $default;
             } elseif ($isInputWrong) {
-                echo 'Please input filename: ';
+                echo 'Please input valid filename: ';
             }
         } while ($isInputWrong);
 
