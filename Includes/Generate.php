@@ -98,7 +98,7 @@ class Generate
      */
     public static function getMinMaxNumberSize($min, $max, $decimalPlaces)
     {
-        $additionalBytes = NULL;
+        $additionalBytes = null;
 
         if ((int) $decimalPlaces > 0) {
             // + 1 for decimal point
