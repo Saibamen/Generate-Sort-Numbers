@@ -31,6 +31,7 @@ script:
   - php generate -debug < tests/generate_simple.txt
   - php generate -debug < tests/generate_negative_confirmation.txt
   # Generating large files
+  - "[ -e tests/generate_10MB_file.txt ] && echo 'File tests/generate_10MB_file.txt exists' || (echo 'File tests/generate_10MB_file.txt not exists!!' && fake_command_to_stop_build)"
   - travis_wait php generate -debug < tests/generate_10MB_file.txt
   - "[ -e 10MB.dat ] && echo 'File 10MB.dat exists' || (echo 'File 10MB.dat not exists!!' && fake_command_to_stop_build)"
   - travis_wait php generate -debug < tests/generate_1GB_file.txt
