@@ -32,9 +32,9 @@ script:
   - php generate -debug < tests/generate_negative_confirmation.txt
   # Generating large files
   - "[ -e tests/generate_10MB_file.txt ] && echo 'File tests/generate_10MB_file.txt exists' || (echo 'File tests/generate_10MB_file.txt not exists!!' && fake_command_to_stop_build)"
-  - travis_wait php generate -debug < tests/generate_10MB_file.txt
+  - php generate -debug < tests/generate_10MB_file.txt
   - "[ -e output.dat ] && echo 'File output.dat exists' || (echo 'File output.dat not exists!!' && fake_command_to_stop_build)"
-  - travis_wait php generate -debug < tests/generate_1GB_file.txt
+  - travis_wait "php generate -debug < tests/generate_1GB_file.txt"
   - "[ -e 1GB.dat ] && echo 'File 1GB.dat exists' || (echo 'File 1GB.dat not exists!!' && fake_command_to_stop_build)"
 
 after_script:
