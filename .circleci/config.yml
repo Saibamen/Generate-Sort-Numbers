@@ -20,15 +20,19 @@ jobs:
       ### Generate
       - run: php generate -debug < tests/generate_simple.txt
       - run: "[ -e test.dat ] && echo 'File test.dat exists' || (echo 'File test.dat not exists!!' && fake_command_to_stop_build)"
+      - run: php generate -debug < tests/generate_invalid_filename.txt
+      - run: "[ -e test/valid_filename.dat ] && echo 'File test/valid_filename.dat exists' || (echo 'File test/valid_filename.dat not exists!!' && fake_command_to_stop_build)"
       - run: php generate -debug < tests/generate_directory.txt
       - run: "[ -e test/test.dat ] && echo 'File test/test.dat exists' || (echo 'File test/test.dat not exists!!' && fake_command_to_stop_build)"
       - run: php generate -debug < tests/generate_default_numbers.txt
       - run: "[ -e default_numbers.dat ] && echo 'File default_numbers.dat exists' || (echo 'File default_numbers.dat not exists!!' && fake_command_to_stop_build)"
+
       # Test for positive confirmation
       - run: php generate -debug < tests/generate_simple.txt
       - run: php generate -debug < tests/generate_negative_confirmation.txt
+
       # Generating large files
-      - run: php generate -debug < tests/generate_10MB_file.txt
+      - run: php generate -debug -testing < tests/generate_10MB_file.txt
       - run: "[ -e 10MB.dat ] && echo 'File 10MB.dat exists' || (echo 'File 10MB.dat not exists!!' && fake_command_to_stop_build)"
-      - run: php generate -debug < tests/generate_1GB_file.txt
+      - run: php generate -debug -testing < tests/generate_1GB_file.txt
       - run: "[ -e 1GB.dat ] && echo 'File 1GB.dat exists' || (echo 'File 1GB.dat not exists!!' && fake_command_to_stop_build)"
