@@ -21,7 +21,7 @@ class Text
     private static $debugMode = false;
 
     /**
-     * Prints how much time took some action in milliseconds.
+     * Prints how much time took some action in seconds.
      *
      * @param float|string $startTime Time when action started
      */
@@ -36,7 +36,7 @@ class Text
         $completedIn = (float) $currentTime - (float) $startTime;
         $completedIn = number_format((float) $completedIn, 4, '.', '');
 
-        self::message('It was done in '.$completedIn.' ms.');
+        self::message('It was done in '.$completedIn.' sec.');
     }
 
     /**
