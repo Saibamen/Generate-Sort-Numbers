@@ -19,6 +19,10 @@ matrix:
     - php: 5.3
       dist: precise
 
+before_script:
+  # Additional PHP config for increasing memory limit
+  - phpenv config-add travis.php.ini
+
 script:
   ### Generate
   - php generate -debug < tests/generate_simple.txt
