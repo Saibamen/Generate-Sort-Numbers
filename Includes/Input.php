@@ -49,7 +49,7 @@ class Input
      *
      * @return int Inserted file size in bytes
      */
-    public static function getFileSizeInput($message, $default = '5MB')
+    public static function getFileSizeInput($message, $default = '1MB')
     {
         echo $message.' [Default: '.$default.']: ';
 

@@ -1,7 +1,7 @@
 5
 10
 6
-50KB
+50B
 bla/
 bla\
 test/valid_filename

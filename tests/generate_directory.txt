@@ -1,5 +1,5 @@
 10
 5
 6
-50KB
+50B
 test/test
