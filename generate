@@ -13,7 +13,7 @@
 
 namespace Generate;
 
-use Includes\File; 
+use Includes\File;
 use Includes\Generate;
 use Includes\Input;
 use Includes\Text;

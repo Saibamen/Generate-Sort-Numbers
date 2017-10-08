@@ -163,7 +163,7 @@ class Input
     }
 
     /**
-     * Get bytes number from unit conversation
+     * Get bytes number from unit conversation.
      *
      * @param int    $number
      * @param string $unit
