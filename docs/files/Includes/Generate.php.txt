@@ -23,7 +23,7 @@ require_once 'Text.php';
 class Generate
 {
     /**
-     * @var bool If true - print less information for ie. Travis or CircleCI to avoid big log file.
+     * @var bool If true - print less information for eg. Travis or CircleCI to avoid big log file.
      */
     private static $testingMode = false;
 

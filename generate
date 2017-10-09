@@ -56,10 +56,8 @@ $max = $minMax['max'];
 
 $decimalPlaces = Input::getNumberInput('Type number of decimal places');
 
-$fileSize = Input::getFileSizeInput("Type maximum file size\nie. `5B`, `5KB`, `5MB`, `5GB`");
+$fileSize = Input::getFileSizeInput("Type maximum file size\neg. `5B`, `5KB`, `5MB`, `5GB`");
 
 $filename = Input::getFilenameInput('Type output filename (without extension)');
 
 Generate::generateRandomNumbers($min, $max, $decimalPlaces, $fileSize, $filename);
-
-//File::saveStringToFile($outputString, $filename);

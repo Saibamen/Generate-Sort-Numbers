@@ -45,7 +45,7 @@ class Input
      * Get file size from User.
      *
      * @param string $message Message for User what he must type
-     * @param string $default Default file size for empty input. Default is '5MB'
+     * @param string $default Default file size for empty input. Default is '1MB'
      *
      * @return int Inserted file size in bytes
      */
@@ -56,29 +56,35 @@ class Input
         do {
             $input = trim(fgets(STDIN));
 
-            $isInputWrong = true;
             $isDefault = false;
 
             if (is_null($input) || empty($input)) {
                 Text::debug('Using default input: '.$default);
-                $input = $default;
-                $isInputWrong = false;
                 $isDefault = true;
+                break;
             } else {
-                // https://regex101.com/r/v936BS/2
-                if (preg_match('/^(?<number>\d+(?!\.+\,+\d*))\s*(?<unit>B|KB|MB|GB|TB)$/', $input, $matches)) {
-                    $isInputWrong = false;
-                } else {
-                    echo 'Please input valid file size: ';
+                $checkInput = self::getBytes($input);
+
+                if (!$checkInput['error']) {
+                    $input = $checkInput['bytes'];
+                    break;
                 }
+
+                echo 'Please input valid file size: ';
             }
-        } while ($isInputWrong);
+        } while (1);
 
         if ($isDefault) {
-            preg_match('/^(?<number>\d+(?!\.+\,+\d*))\s*(?<unit>B|KB|MB|GB|TB)$/', $input, $matches);
-        }
+            // Check $default just for sure
+            $checkDefault = self::getBytes($default);
 
-        $input = self::getBytes($matches['number'], $matches['unit']);
+            // 1 MB in bytes
+            $input = 1048576;
+
+            if (!$checkDefault['error']) {
+                $input = $checkDefault['bytes'];
+            }
+        }
 
         return $input;
     }
@@ -165,33 +171,44 @@ class Input
     /**
      * Get bytes number from unit conversation.
      *
-     * @param int    $number
-     * @param string $unit
+     * @param string $input    User input e.g. '5B', '5MB'
      * @param int    $notation Notation type for kilo
      *
-     * @return float|int
+     * @return array
      */
-    protected static function getBytes($number, $unit, $notation = 1024)
+    protected static function getBytes($input, $notation = 1024)
     {
-        switch ($unit) {
+        $error = true;
+        $bytes = 0;
+
+        // https://regex101.com/r/v936BS/2
+        if (preg_match('/^(?<number>\d+(?!\.+\,+\d*))\s*(?<unit>B|KB|MB|GB|TB)$/', $input, $matches)) {
+            $error = false;
+        }
+
+        if ($error) {
+            return array('error' => $error, 'bytes' => $bytes);
+        }
+
+        switch ($matches['unit']) {
             case 'KB':
-                $bytes = $number * $notation;
+                $bytes = $matches['number'] * $notation;
                 break;
             case 'MB':
-                $bytes = $number * pow($notation, 2);
+                $bytes = $matches['number'] * pow($notation, 2);
                 break;
             case 'GB':
-                $bytes = $number * pow($notation, 3);
+                $bytes = $matches['number'] * pow($notation, 3);
                 break;
             case 'TB':
-                $bytes = $number * pow($notation, 4);
+                $bytes = $matches['number'] * pow($notation, 4);
                 break;
             // As Bytes
             default:
-                $bytes = $number;
+                $bytes = $matches['number'];
                 break;
         }
 
-        return $bytes;
+        return array('error' => $error, 'bytes' => $bytes);
     }
 }
