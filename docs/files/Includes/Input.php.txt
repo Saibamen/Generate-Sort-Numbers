@@ -10,37 +10,13 @@
 
 namespace Includes;
 
+require_once 'Text.php';
+
 /**
  * Functions for receiving input from User.
  */
 class Input
 {
-    /**
-     * Get number from User.
-     *
-     * @param string    $message Message for User what he must type
-     * @param int|float $default Default number for empty input. Default is 0
-     *
-     * @return float Inserted number
-     */
-    public static function getNumber($message, $default = 0)
-    {
-        echo $message.' [Default: '.$default.']: ';
-
-        do {
-            $input = trim(fgets(/** @scrutinizer ignore-type */ STDIN));
-
-            if (is_null($input) || empty($input)) {
-                Text::debug('Using default input: '.$default);
-                $input = $default;
-            } elseif (!is_numeric($input)) {
-                echo 'Please input number: ';
-            }
-        } while (!is_numeric($input));
-
-        return (float) $input;
-    }
-
     /**
      * Get file size from User.
      *
@@ -135,42 +111,6 @@ class Input
     }
 
     /**
-     * Terminate script if User denied on confirmation.
-     *
-     * @see Input::getUserConfirm()
-     */
-    public static function dieOnDenyUserConfirm()
-    {
-        if (!self::getUserConfirm()) {
-            die('Script terminated by user.');
-        }
-    }
-
-    /**
-     * Get User confirmation. Default is YES.
-     *
-     * @return bool Confirmation result
-     */
-    public static function getUserConfirm()
-    {
-        while (1) {
-            echo 'Do you really want to continue? [Y/n]: ';
-
-            $input = trim(fgets(/** @scrutinizer ignore-type */ STDIN));
-
-            // Default is YES
-            if (is_null($input) || empty($input) || strtolower($input) == 'y' || strtolower($input) == 'yes') {
-                return true;
-            } elseif (strtolower($input) == 'n' || strtolower($input) == 'no') {
-                return false;
-            }
-        }
-
-        // Fix missing return statement warning. Return true...
-        return true;
-    }
-
-    /**
      * Get bytes number from unit conversation.
      *
      * @param string $input    User input e.g. '5B', '5MB'
@@ -212,6 +152,95 @@ class Input
         }
 
         return array('error' => $error, 'bytes' => $bytes);
+    }
+
+    /**
+     * Get number from User.
+     *
+     * @param string    $message Message for User what he must type
+     * @param int|float $default Default number for empty input. Default is 0
+     *
+     * @return float Inserted number
+     */
+    public static function getNumber($message, $default = 0)
+    {
+        echo $message.' [Default: '.$default.']: ';
+
+        do {
+            $input = trim(fgets(/** @scrutinizer ignore-type */ STDIN));
+
+            if (is_null($input) || empty($input)) {
+                Text::debug('Using default input: '.$default);
+                $input = $default;
+            } elseif (!is_numeric($input)) {
+                echo 'Please input number: ';
+            }
+        } while (!is_numeric($input));
+
+        return (float) $input;
+    }
+
+    /**
+     * Get User confirmation. Default is YES.
+     *
+     * @return bool Confirmation result
+     */
+    public static function getUserConfirm()
+    {
+        while (1) {
+            echo 'Do you really want to continue? [Y/n]: ';
+
+            $input = trim(fgets(/** @scrutinizer ignore-type */ STDIN));
+
+            // Default is YES
+            if (is_null($input) || empty($input) || strtolower($input) == 'y' || strtolower($input) == 'yes') {
+                return true;
+            } elseif (strtolower($input) == 'n' || strtolower($input) == 'no') {
+                return false;
+            }
+        }
+
+        // Fix missing return statement warning. Return true...
+        return true;
+    }
+
+    /**
+     * Get exists filename
+     *
+     * @param string $message       Message for User what he must type
+     * @param string $default       Default filename for empty input. Default is 'output'
+     * @param string $fileExtension File extension. Default is '.dat'
+     *
+     * @return string
+     *
+     * @see Input::getFilename()
+     */
+    public static function getExistsFilename($message, $default = 'output', $fileExtension = '.dat')
+    {
+        $filename = self::getFilename($message, $default);
+
+        do {
+            $error = false;
+
+            if (!file_exists($filename.$fileExtension)) {
+                $error = true;
+                $filename = self::getFilename('Please type existing file', $default);
+            }
+        } while ($error);
+
+        return $filename;
+    }
+
+    /**
+     * Terminate script if User denied on confirmation.
+     *
+     * @see Input::getUserConfirm()
+     */
+    public static function dieOnDenyUserConfirm()
+    {
+        if (!self::getUserConfirm()) {
+            die('Script terminated by user.');
+        }
     }
 }
 

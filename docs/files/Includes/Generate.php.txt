@@ -30,18 +30,19 @@ class Generate
     /**
      * Generate string with randomized numbers.
      *
-     * @param int|float $min           Minimum allowed number to generate
-     * @param int|float $max           Maximum allowed number to generate
-     * @param int|float $decimalPlaces Number of decimal places
-     * @param int       $maxFileSize   Maximum file size in bytes
-     * @param string    $filename      Output filename without extension
-     * @param string    $fileExtension File extension. Default is '.dat'
+     * @param int|float    $min           Minimum allowed number to generate
+     * @param int|float    $max           Maximum allowed number to generate
+     * @param int|float    $decimalPlaces Number of decimal places
+     * @param int          $maxFileSize   Maximum file size in bytes
+     * @param string       $filename      Output filename without extension
+     * @param string|mixed $delimiter     Delimiter. Default is ' '
+     * @param string       $fileExtension File extension. Default is '.dat'
      *
      * @see Generate::getMinMaxNumberSize()
      * @see File::createMissingDirectory()
      * @see File::checkIfFileExists()
      */
-    public static function generateAndSaveRandomNumbers($min, $max, $decimalPlaces, $maxFileSize, $filename, $fileExtension = '.dat')
+    public static function generateAndSaveRandomNumbers($min, $max, $decimalPlaces, $maxFileSize, $filename, $delimiter = ' ', $fileExtension = '.dat')
     {
         $range = $max - $min;
 
@@ -52,9 +53,9 @@ class Generate
         }
 
         File::createMissingDirectory($filename);
-        File::checkIfFileExists($filename, $fileExtension);
+        File::checkIfFileExistsAndDeleteContent($filename, $fileExtension);
 
-        // Maximum iteration without spaces
+        // Maximum iteration without delimiter
         $maximumIteration = (int) ($maxFileSize / $minMaxNumberSize['max']);
         Text::debug('First maximum iteration: '.$maximumIteration);
 
@@ -64,7 +65,7 @@ class Generate
 
         for ($i = 0; ; $i++) {
             $tempMaxIteration = $maximumIteration - $i;
-            $maximumBytes = ($minMaxNumberSize['max'] * $tempMaxIteration) + $tempMaxIteration - 1;
+            $maximumBytes = ($minMaxNumberSize['max'] * $tempMaxIteration) + $tempMaxIteration - strlen($delimiter);
 
             if ($maxFileSize >= $maximumBytes) {
                 $maximumIteration = $tempMaxIteration;
@@ -93,11 +94,11 @@ class Generate
             // Format with trailing zeros ie. 8.00
             $number = number_format((float) $number, (int) $decimalPlaces, '.', '');
 
-            $outputString = $number.' ';
+            $outputString = $number.$delimiter;
 
-            // Remove last space
+            // Remove last delimiter
             if ($i === $maximumIteration) {
-                $outputString = trim($outputString);
+                $outputString = rtrim($outputString, $delimiter);
             }
 
             fwrite($file, $outputString);

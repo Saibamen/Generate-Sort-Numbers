@@ -30,6 +30,20 @@ If you want see more information, type:
 php generate -debug
 ```
 
+### Sorting numbers
+
+Run sort script and follow instructions:
+
+```
+php sort
+```
+
+If you want see more information, type:
+
+```
+php sort -debug
+```
+
 ### Generating documentation
 
 Update Composer and install [phpDocumentor](https://www.phpdoc.org/) from composer.json:
@@ -43,10 +57,10 @@ Generate documentation:
 
 Under Linux / MacOSX:
 ```
-vendor/bin/phpdoc -d ./ -f generate -t ./docs --ignore "vendor/"
+vendor/bin/phpdoc -d ./ -f generate -f sort -t ./docs --ignore "vendor/"
 ```
 
 Under Windows:
 ```
-vendor\bin\phpdoc.bat -d ./ -f generate -t ./docs --ignore "vendor/"
+vendor\bin\phpdoc.bat -d ./ -f generate -f sort -t ./docs --ignore "vendor/"
 ```

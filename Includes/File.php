@@ -16,6 +16,42 @@ namespace Includes;
 class File
 {
     /**
+     * Save array to file
+     *
+     * @param array        $array         Array to sort
+     * @param string       $filename      Filename without extension
+     * @param string|mixed $delimiter     Delimiter. Default is ' '
+     * @param string       $fileExtension File extension. Default is '.dat'
+     */
+    public static function saveArrayToFile($array, $filename, $delimiter = ' ', $fileExtension = '.dat')
+    {
+        $arrayCount = count($array);
+
+        Text::message('Saving to file...');
+
+        $saveStart = microtime(true);
+
+        $file = fopen($filename.$fileExtension, 'w');
+
+        $i = 0;
+        foreach ($array as $value) {
+            $outputString = $value.$delimiter;
+
+            // Remove last delimiter
+            if (++$i === $arrayCount) {
+                $outputString = rtrim($outputString, $delimiter);
+            }
+
+            fwrite($file, $outputString);
+        }
+
+        fclose($file);
+
+        Text::printTimeDuration($saveStart);
+        Text::message('Output file '.$filename.$fileExtension.' saved with '.filesize($filename.$fileExtension).' bytes.');
+    }
+
+    /**
      * Warn about overwriting file if exists and empty it.
      *
      * @param string $filename      Filename without extension
@@ -51,9 +87,9 @@ class File
     /**
      * Get array from file content
      *
-     * @param string $filename      Filename without extension
-     * @param string $fileExtension File extension. Default is '.dat'
-     * @param string $delimiter     Delimiter. Default is ' '
+     * @param string       $filename      Filename without extension
+     * @param string       $fileExtension File extension. Default is '.dat'
+     * @param string|mixed $delimiter     Delimiter. Default is ' '
      *
      * @return array
      */

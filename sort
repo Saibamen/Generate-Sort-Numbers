@@ -1,0 +1,58 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Sort script.
+ *
+ * Sorts randomized floating numbers from file and save to another file.
+ *
+ * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
+ * @license MIT
+ *
+ * @link    https://github.com/Saibamen/Generate-Sort-Numbers
+ */
+
+namespace Sort;
+
+use Includes\File;
+use Includes\Generate;
+use Includes\Input;
+use Includes\Text;
+
+// Run only in CLI
+if (php_sapi_name() !== 'cli') {
+    exit('This is console app. Please run it in console (CLI)!');
+}
+
+// Increase the memory limit
+ini_set('memory_limit', '1024M');
+
+require_once 'Includes/Generate.php';
+require_once 'Includes/Input.php';
+require_once 'Includes/File.php';
+
+// Check for console arguments
+if (count($argv) > 1) {
+    foreach ($argv as $arg) {
+        switch ($arg) {
+            case '-debug':
+                Text::message('Debug mode. Have fun!');
+                Text::setDebug(true);
+                break;
+        }
+    }
+}
+
+$inputFilename = Input::getExistsFilename('Type input filename to read (without extension)');
+$outputFilename = Input::getFilename('Type output filename (without extension)', 'sorted');
+
+$array = File::getArrayFromFile($inputFilename);
+Text::debug('Array elements: '.count($array));
+
+Text::message('SORTING...');
+$sortStart = microtime(true);
+
+sort($array);
+
+Text::printTimeDuration($sortStart);
+
+File::saveArrayToFile($array, $outputFilename);
