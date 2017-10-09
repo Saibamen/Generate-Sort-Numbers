@@ -40,30 +40,6 @@ class Text
     }
 
     /**
-     * Set $debugMode property value.
-     *
-     * @param bool $value
-     *
-     * @see Text::$debugMode
-     */
-    public static function setDebug($value)
-    {
-        self::$debugMode = $value;
-    }
-
-    /**
-     * Get $debugMode property value.
-     *
-     * @return bool
-     *
-     * @see Text::$debugMode
-     */
-    public static function getDebug()
-    {
-        return self::$debugMode;
-    }
-
-    /**
      * Execute message() function if $debugMode is set to true.
      *
      * @param mixed $message Message to print if in DEBUG mode
@@ -87,5 +63,29 @@ class Text
     public static function message($message)
     {
         echo "\n".$message."\n";
+    }
+
+    /**
+     * Set $debugMode property value.
+     *
+     * @param bool $value
+     *
+     * @see Text::$debugMode
+     */
+    public static function setDebug($value)
+    {
+        self::$debugMode = $value;
+    }
+
+    /**
+     * Get $debugMode property value.
+     *
+     * @return bool
+     *
+     * @see Text::$debugMode
+     */
+    public static function getDebug()
+    {
+        return self::$debugMode;
     }
 }
