@@ -52,7 +52,7 @@ class Generate
         }
 
         File::createMissingDirectory($filename);
-        File::checkIfFileExists($filename, $fileExtension);
+        File::checkIfFileExistsAndDeleteContent($filename, $fileExtension);
 
         // Maximum iteration without spaces
         $maximumIteration = (int) ($maxFileSize / $minMaxNumberSize['max']);
