@@ -205,7 +205,7 @@ class Input
     }
 
     /**
-     * Get exists filename
+     * Get exists filename.
      *
      * @param string $message       Message for User what he must type
      * @param string $default       Default filename for empty input. Default is 'output'
