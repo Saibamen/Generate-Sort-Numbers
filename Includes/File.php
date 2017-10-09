@@ -49,7 +49,7 @@ class File
     }
 
     /**
-     * Get array from file content
+     * Get array from file content.
      *
      * @param string $filename      Filename without extension
      * @param string $fileExtension File extension. Default is '.dat'
