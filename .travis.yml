@@ -55,13 +55,5 @@ script:
   - "[ -e sort_10MB.dat ] && echo 'File sort_10MB.dat exists' || (echo 'File sort_10MB.dat not exists!!' && fake_command_to_stop_build)"
 
 after_script:
-  - rm test.dat
-  - rm test/valid_filename.dat
-  - rm test/test.dat
-  - rmdir test
-  - rm default_numbers.dat
-  - rm 10MB.dat
-  - rm 500MB.dat
-  - rm 1GB.dat
-  - rm sort_test.dat
-  - rm sort_10MB.dat
+  - rm *.dat
+  - rm -rf test

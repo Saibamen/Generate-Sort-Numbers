@@ -46,7 +46,7 @@ php sort -debug
 
 ### Generating documentation
 
-Update Composer and install [phpDocumentor](https://www.phpdoc.org/) from composer.json:
+Update Composer and install latest [phpDocumentor](https://www.phpdoc.org/) from composer.json:
 
 ```
 composer self-update
