@@ -23,7 +23,7 @@ class Input
      *
      * @return float Inserted number
      */
-    public static function getNumberInput($message, $default = 0)
+    public static function getNumber($message, $default = 0)
     {
         echo $message.' [Default: '.$default.']: ';
 
@@ -48,8 +48,10 @@ class Input
      * @param string $default Default file size for empty input. Default is '1MB'
      *
      * @return int Inserted file size in bytes
+     *
+     * @see Input::getBytesFromString()
      */
-    public static function getFileSizeInput($message, $default = '1MB')
+    public static function getFileSize($message, $default = '1MB')
     {
         echo $message.' [Default: '.$default.']: ';
 
@@ -62,21 +64,22 @@ class Input
                 Text::debug('Using default input: '.$default);
                 $isDefault = true;
                 break;
-            } else {
-                $checkInput = self::getBytes($input);
-
-                if (!$checkInput['error']) {
-                    $input = $checkInput['bytes'];
-                    break;
-                }
-
-                echo 'Please input valid file size: ';
             }
+
+            $checkInput = self::getBytesFromString($input);
+
+            if (!$checkInput['error']) {
+                $input = $checkInput['bytes'];
+                break;
+            }
+
+            echo 'Please input valid file size: ';
+
         } while (1);
 
         if ($isDefault) {
             // Check $default just for sure
-            $checkDefault = self::getBytes($default);
+            $checkDefault = self::getBytesFromString($default);
 
             // 1 MB in bytes
             $input = 1048576;
@@ -97,7 +100,7 @@ class Input
      *
      * @return string Inserted filename
      */
-    public static function getFilenameInput($message, $default = 'output')
+    public static function getFilename($message, $default = 'output')
     {
         echo $message.' [Default: '.$default.']: ';
 
@@ -176,7 +179,7 @@ class Input
      *
      * @return array
      */
-    protected static function getBytes($input, $notation = 1024)
+    protected static function getBytesFromString($input, $notation = 1024)
     {
         $error = true;
         $bytes = 0;

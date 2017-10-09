@@ -41,7 +41,7 @@ class Generate
      * @see File::createMissingDirectory()
      * @see File::checkIfFileExists()
      */
-    public static function generateRandomNumbers($min, $max, $decimalPlaces, $maxFileSize, $filename, $fileExtension = '.dat')
+    public static function generateAndSaveRandomNumbers($min, $max, $decimalPlaces, $maxFileSize, $filename, $fileExtension = '.dat')
     {
         $range = $max - $min;
 
@@ -80,7 +80,7 @@ class Generate
 
         $generateStart = microtime(true);
 
-        $fp = fopen($filename.$fileExtension, 'w');
+        $file = fopen($filename.$fileExtension, 'w');
 
         for ($i = 1; $i <= $maximumIteration; $i++) {
             // Print progress and move cursor back to position 0
@@ -100,10 +100,10 @@ class Generate
                 $outputString = trim($outputString);
             }
 
-            fwrite($fp, $outputString);
+            fwrite($file, $outputString);
         }
 
-        fclose($fp);
+        fclose($file);
 
         Text::printTimeDuration($generateStart);
         Text::message('Output file '.$filename.$fileExtension.' generated with '.filesize($filename.$fileExtension).' bytes.');

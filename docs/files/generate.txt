@@ -44,8 +44,8 @@ if (count($argv) > 1) {
     }
 }
 
-$min = Input::getNumberInput('Type minimum allowed number');
-$max = Input::getNumberInput('Type maximum allowed number', 10);
+$min = Input::getNumber('Type minimum allowed number');
+$max = Input::getNumber('Type maximum allowed number', 10);
 
 // Switch min and max if min > max
 $minMax = Generate::checkSwitchMinMax($min, $max);
@@ -53,11 +53,11 @@ $minMax = Generate::checkSwitchMinMax($min, $max);
 $min = $minMax['min'];
 $max = $minMax['max'];
 
-$decimalPlaces = Input::getNumberInput('Type number of decimal places');
+$decimalPlaces = Input::getNumber('Type number of decimal places');
 
-$fileSize = Input::getFileSizeInput("Type maximum file size\neg. `5B`, `5KB`, `5MB`, `5GB`");
+$fileSize = Input::getFileSize("Type maximum file size\neg. `5B`, `5KB`, `5MB`, `5GB`");
 
-$filename = Input::getFilenameInput('Type output filename (without extension)');
+$filename = Input::getFilename('Type output filename (without extension)');
 
-Generate::generateRandomNumbers($min, $max, $decimalPlaces, $fileSize, $filename);
+Generate::generateAndSaveRandomNumbers($min, $max, $decimalPlaces, $fileSize, $filename);
 
