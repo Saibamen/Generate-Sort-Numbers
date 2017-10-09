@@ -9,6 +9,8 @@
 
 PHP console app for [Fingo](http://www.fingo.pl/).
 
+Documentation for programmers: [here](https://saibamen.github.io/Generate-Sort-Numbers/)
+
 ## Requirements
 
 * PHP >= 5.3.3
