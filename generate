@@ -13,7 +13,6 @@
 
 namespace Generate;
 
-use Includes\File;
 use Includes\Generate;
 use Includes\Input;
 use Includes\Text;
@@ -59,7 +58,8 @@ $decimalPlaces = Input::getNumberInput('Type number of decimal places');
 
 $fileSize = Input::getFileSizeInput("Type maximum file size\nie. `5B`, `5KB`, `5MB`, `5GB`");
 
-$outputString = Generate::generateRandomNumbers($min, $max, $decimalPlaces, $fileSize);
-
 $filename = Input::getFilenameInput('Type output filename (without extension)');
-File::saveStringToFile($outputString, $filename);
+
+Generate::generateRandomNumbers($min, $max, $decimalPlaces, $fileSize, $filename);
+
+//File::saveStringToFile($outputString, $filename);

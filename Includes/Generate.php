@@ -30,22 +30,35 @@ class Generate
     /**
      * Generate string with randomized numbers.
      *
-     * @param int|float $min           Minimum allowed number to generate
-     * @param int|float $max           Maximum allowed number to generate
+     * @param int|float $min Minimum allowed number to generate
+     * @param int|float $max Maximum allowed number to generate
      * @param int|float $decimalPlaces Number of decimal places
-     * @param int       $maxFileSize   Maximum file size in bytes
-     *
-     * @return string Generated string without trailing spaces
+     * @param int $maxFileSize Maximum file size in bytes
+     * @param string $filename Output filename without extension
+     * @param string $fileExtension File extension. Default is '.dat'
      */
-    public static function generateRandomNumbers($min, $max, $decimalPlaces, $maxFileSize)
+    public static function generateRandomNumbers($min, $max, $decimalPlaces, $maxFileSize, $filename, $fileExtension = '.dat')
     {
         $range = $max - $min;
-        $outputString = '';
 
         $minMaxNumberSize = self::getMinMaxNumberSize($min, $max, $decimalPlaces);
 
         if ($minMaxNumberSize['max'] > $maxFileSize) {
             die('Error: Cannot generate any number due to too low file size.');
+        }
+
+        // Create dir if not exists
+        if (!is_dir(dirname($filename))) {
+            Text::debug('Creating missing directory: '.dirname($filename));
+            mkdir(dirname($filename));
+        }
+
+        // Warn about overwriting file
+        if (file_exists($filename.$fileExtension)) {
+            Text::message('File '.$filename.$fileExtension.' exists and it will be overwritten!');
+            Input::dieOnDenyUserConfirm();
+            // Empty the file
+            file_put_contents($filename.$fileExtension, '');
         }
 
         // Maximum iteration without spaces
@@ -74,6 +87,8 @@ class Generate
 
         $generateStart = microtime(true);
 
+        $fp = fopen($filename.$fileExtension, 'w');
+
         for ($i = 1; $i <= $maximumIteration; $i++) {
             // Print progress and move cursor back to position 0
             if (!self::getTesting()) {
@@ -84,14 +99,21 @@ class Generate
             $number = $min + $range * (mt_rand() / mt_getrandmax());
             // Format with trailing zeros ie. 8.00
             $number = number_format((float) $number, (int) $decimalPlaces, '.', '');
-            $outputString .= $number.' ';
+
+            $outputString = $number.' ';
+
+            // Remove last space
+            if ($i === $maximumIteration) {
+                $outputString = trim($outputString);
+            }
+
+            fwrite($fp, $outputString);
         }
 
-        Text::printTimeDuration($generateStart);
-        Text::debug('Output string has '.strlen(trim($outputString)).' bytes.');
+        fclose($fp);
 
-        // Remove last space
-        return trim($outputString);
+        Text::printTimeDuration($generateStart);
+        Text::message('Output file '.$filename.$fileExtension.' generated with '.filesize($filename.$fileExtension).' bytes.');
     }
 
     /**
