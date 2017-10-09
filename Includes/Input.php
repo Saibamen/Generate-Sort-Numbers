@@ -10,6 +10,8 @@
 
 namespace Includes;
 
+require_once 'Text.php';
+
 /**
  * Functions for receiving input from User.
  */
