@@ -28,7 +28,7 @@ class Input
         echo $message.' [Default: '.$default.']: ';
 
         do {
-            $input = trim(fgets(STDIN));
+            $input = trim(fgets(/** @scrutinizer ignore-type */ STDIN));
 
             if (is_null($input) || empty($input)) {
                 Text::debug('Using default input: '.$default);
@@ -47,7 +47,7 @@ class Input
      * @param string $message Message for User what he must type
      * @param string $default Default file size for empty input. Default is '1MB'
      *
-     * @return int Inserted file size in bytes
+     * @return int|string Inserted file size in bytes
      *
      * @see Input::getBytesFromString()
      */
@@ -56,7 +56,7 @@ class Input
         echo $message.' [Default: '.$default.']: ';
 
         do {
-            $input = trim(fgets(STDIN));
+            $input = trim(fgets(/** @scrutinizer ignore-type */ STDIN));
 
             $isDefault = false;
 
@@ -74,7 +74,6 @@ class Input
             }
 
             echo 'Please input valid file size: ';
-
         } while (1);
 
         if ($isDefault) {
@@ -105,7 +104,7 @@ class Input
         echo $message.' [Default: '.$default.']: ';
 
         do {
-            $input = trim(fgets(STDIN));
+            $input = trim(fgets(/** @scrutinizer ignore-type */ STDIN));
 
             /*
              * Invalid characters in files:
@@ -157,7 +156,7 @@ class Input
         while (1) {
             echo 'Do you really want to continue? [Y/n]: ';
 
-            $input = trim(fgets(STDIN));
+            $input = trim(fgets(/** @scrutinizer ignore-type */ STDIN));
 
             // Default is YES
             if (is_null($input) || empty($input) || strtolower($input) == 'y' || strtolower($input) == 'yes') {
