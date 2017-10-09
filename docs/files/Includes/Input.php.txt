@@ -42,6 +42,48 @@ class Input
     }
 
     /**
+     * Get file size from User.
+     *
+     * @param string $message Message for User what he must type
+     * @param string $default Default file size for empty input. Default is '5MB'
+     *
+     * @return int Inserted file size in bytes
+     */
+    public static function getFileSizeInput($message, $default = '1MB')
+    {
+        echo $message.' [Default: '.$default.']: ';
+
+        do {
+            $input = trim(fgets(STDIN));
+
+            $isInputWrong = true;
+            $isDefault = false;
+
+            if (is_null($input) || empty($input)) {
+                Text::debug('Using default input: '.$default);
+                $input = $default;
+                $isInputWrong = false;
+                $isDefault = true;
+            } else {
+                // https://regex101.com/r/v936BS/2
+                if (preg_match('/^(?<number>\d+(?!\.+\,+\d*))\s*(?<unit>B|KB|MB|GB|TB)$/', $input, $matches)) {
+                    $isInputWrong = false;
+                } else {
+                    echo 'Please input valid file size: ';
+                }
+            }
+        } while ($isInputWrong);
+
+        if ($isDefault) {
+            preg_match('/^(?<number>\d+(?!\.+\,+\d*))\s*(?<unit>B|KB|MB|GB|TB)$/', $input, $matches);
+        }
+
+        $input = self::getBytes($matches['number'], $matches['unit']);
+
+        return $input;
+    }
+
+    /**
      * Get valid filename from User.
      *
      * @param string $message Message for User what he must type
@@ -118,6 +160,39 @@ class Input
 
         // Fix missing return statement warning. Return true...
         return true;
+    }
+
+    /**
+     * Get bytes number from unit conversation.
+     *
+     * @param int    $number
+     * @param string $unit
+     * @param int    $notation Notation type for kilo
+     *
+     * @return float|int
+     */
+    protected static function getBytes($number, $unit, $notation = 1024)
+    {
+        switch ($unit) {
+            case 'KB':
+                $bytes = $number * $notation;
+                break;
+            case 'MB':
+                $bytes = $number * pow($notation, 2);
+                break;
+            case 'GB':
+                $bytes = $number * pow($notation, 3);
+                break;
+            case 'TB':
+                $bytes = $number * pow($notation, 4);
+                break;
+            // As Bytes
+            default:
+                $bytes = $number;
+                break;
+        }
+
+        return $bytes;
     }
 }
 

@@ -23,7 +23,7 @@ require_once 'Text.php';
 class Generate
 {
     /**
-     * @var bool If true - print more information.
+     * @var bool If true - print less information for ie. Travis or CircleCI to avoid big log file.
      */
     private static $testingMode = false;
 
@@ -36,6 +36,10 @@ class Generate
      * @param int       $maxFileSize   Maximum file size in bytes
      * @param string    $filename      Output filename without extension
      * @param string    $fileExtension File extension. Default is '.dat'
+     *
+     * @see Generate::getMinMaxNumberSize()
+     * @see File::createMissingDirectory()
+     * @see File::checkIfFileExists()
      */
     public static function generateRandomNumbers($min, $max, $decimalPlaces, $maxFileSize, $filename, $fileExtension = '.dat')
     {
@@ -47,19 +51,8 @@ class Generate
             die('Error: Cannot generate any number due to too low file size.');
         }
 
-        // Create dir if not exists
-        if (!is_dir(dirname($filename))) {
-            Text::debug('Creating missing directory: '.dirname($filename));
-            mkdir(dirname($filename));
-        }
-
-        // Warn about overwriting file
-        if (file_exists($filename.$fileExtension)) {
-            Text::message('File '.$filename.$fileExtension.' exists and it will be overwritten!');
-            Input::dieOnDenyUserConfirm();
-            // Empty the file
-            file_put_contents($filename.$fileExtension, '');
-        }
+        File::createMissingDirectory($filename);
+        File::checkIfFileExists($filename, $fileExtension);
 
         // Maximum iteration without spaces
         $maximumIteration = (int) ($maxFileSize / $minMaxNumberSize['max']);
