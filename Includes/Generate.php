@@ -30,12 +30,12 @@ class Generate
     /**
      * Generate string with randomized numbers.
      *
-     * @param int|float $min Minimum allowed number to generate
-     * @param int|float $max Maximum allowed number to generate
+     * @param int|float $min           Minimum allowed number to generate
+     * @param int|float $max           Maximum allowed number to generate
      * @param int|float $decimalPlaces Number of decimal places
-     * @param int $maxFileSize Maximum file size in bytes
-     * @param string $filename Output filename without extension
-     * @param string $fileExtension File extension. Default is '.dat'
+     * @param int       $maxFileSize   Maximum file size in bytes
+     * @param string    $filename      Output filename without extension
+     * @param string    $fileExtension File extension. Default is '.dat'
      */
     public static function generateRandomNumbers($min, $max, $decimalPlaces, $maxFileSize, $filename, $fileExtension = '.dat')
     {
