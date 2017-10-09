@@ -74,7 +74,6 @@ class Input
             }
 
             echo 'Please input valid file size: ';
-
         } while (1);
 
         if ($isDefault) {
