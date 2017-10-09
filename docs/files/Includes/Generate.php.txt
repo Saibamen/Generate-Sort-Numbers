@@ -118,7 +118,7 @@ class Generate
      *
      * @return array
      */
-    public static function getMinMaxNumberSize($min, $max, $decimalPlaces)
+    private static function getMinMaxNumberSize($min, $max, $decimalPlaces)
     {
         $additionalBytes = null;
 

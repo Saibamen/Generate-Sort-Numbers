@@ -42,8 +42,8 @@ script:
   # Generating large files
   - php generate -debug -testing < tests/generate_10MB_file.txt
   - "[ -e 10MB.dat ] && echo 'File 10MB.dat exists' || (echo 'File 10MB.dat not exists!!' && fake_command_to_stop_build)"
-  #- php generate -debug -testing < tests/generate_1GB_file.txt
-  #- "[ -e 1GB.dat ] && echo 'File 1GB.dat exists' || (echo 'File 1GB.dat not exists!!' && fake_command_to_stop_build)"
+  - php generate -debug -testing < tests/generate_1GB_file.txt
+  - "[ -e 1GB.dat ] && echo 'File 1GB.dat exists' || (echo 'File 1GB.dat not exists!!' && fake_command_to_stop_build)"
 
 after_script:
   - rm test.dat
@@ -52,4 +52,4 @@ after_script:
   - rmdir test
   - rm default_numbers.dat
   - rm 10MB.dat
-  #- rm 1GB.dat
+  - rm 1GB.dat
