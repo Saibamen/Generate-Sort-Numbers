@@ -16,7 +16,7 @@ namespace Includes;
 class File
 {
     /**
-     * Save array to file
+     * Save array to file.
      *
      * @param array        $array         Array to sort
      * @param string       $filename      Filename without extension
