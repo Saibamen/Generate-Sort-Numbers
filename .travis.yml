@@ -46,7 +46,7 @@ script:
   - "[ -e 256MB.dat ] && echo 'File 256MB.dat exists' || (echo 'File 256MB.dat not exists!!' && fake_command_to_stop_build)"
   # For now only nightly PHP can handle this with default memory limit
   - if [[ "$TRAVIS_PHP_VERSION" == "nightly" ]]; then php generate -debug -testing < tests/generate_1GB_file.txt; fi
-  - if [[ "$TRAVIS_PHP_VERSION" == "nightly" ]]; then "[ -e 1GB.dat ] && echo 'File 1GB.dat exists' || (echo 'File 1GB.dat not exists!!' && fake_command_to_stop_build)"; fi
+  - if [[ "$TRAVIS_PHP_VERSION" == "nightly" ]]; then [ -e 1GB.dat ] && echo 'File 1GB.dat exists' || (echo 'File 1GB.dat not exists!!' && fake_command_to_stop_build); fi
 
   ### Sort
   - php sort -debug < tests/sort_simple.txt
