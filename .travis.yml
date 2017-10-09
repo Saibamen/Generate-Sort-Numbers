@@ -48,6 +48,12 @@ script:
   - if [[ "$TRAVIS_PHP_VERSION" == "nightly" ]]; then php generate -debug -testing < tests/generate_1GB_file.txt; fi
   - if [[ "$TRAVIS_PHP_VERSION" == "nightly" ]]; then "[ -e 1GB.dat ] && echo 'File 1GB.dat exists' || (echo 'File 1GB.dat not exists!!' && fake_command_to_stop_build)"; fi
 
+  ### Sort
+  - php sort -debug < tests/sort_simple.txt
+  - "[ -e sort_test.dat ] && echo 'File sort_test.dat exists' || (echo 'File sort_test.dat not exists!!' && fake_command_to_stop_build)"
+  - php sort -debug < tests/sort_10MB.txt
+  - "[ -e sort_10MB.dat ] && echo 'File sort_10MB.dat exists' || (echo 'File sort_10MB.dat not exists!!' && fake_command_to_stop_build)"
+
 after_script:
   - rm test.dat
   - rm test/valid_filename.dat
@@ -57,3 +63,5 @@ after_script:
   - rm 10MB.dat
   - rm 500MB.dat
   - rm 1GB.dat
+  - rm sort_test.dat
+  - rm sort_10MB.dat
