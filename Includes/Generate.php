@@ -7,11 +7,6 @@
  *
  * @link    https://github.com/Saibamen/Generate-Sort-Numbers
  */
-/**
- * Functions for 'Generate' script.
- *
- * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
- */
 
 namespace Includes;
 
