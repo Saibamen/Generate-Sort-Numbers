@@ -27,8 +27,7 @@ class File
     {
         $arrayCount = count($array);
 
-        Text::message('Saving to file...');
-
+        Text::message('Saving to file in foreach...');
         $saveStart = microtime(true);
 
         $file = fopen($filename.$fileExtension, 'w');
@@ -48,6 +47,29 @@ class File
         fclose($file);
 
         Text::printTimeDuration($saveStart);
+
+
+
+        Text::message('Saving to file in for loop...');
+        $saveStart = microtime(true);
+
+        $file = fopen($filename.$fileExtension, 'w');
+
+        for ($i = 0; $i < $arrayCount; $i++) {
+            $outputString = $array[$i].$delimiter;
+
+            // Remove last delimiter
+            if ($i === $arrayCount - 1) {
+                $outputString = rtrim($outputString, $delimiter);
+            }
+
+            fwrite($file, $outputString);
+        }
+
+        fclose($file);
+
+        Text::printTimeDuration($saveStart);
+
         Text::message('Output file '.$filename.$fileExtension.' saved with '.filesize($filename.$fileExtension).' bytes.');
     }
 
