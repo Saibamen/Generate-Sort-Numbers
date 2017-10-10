@@ -48,8 +48,6 @@ class File
 
         Text::printTimeDuration($saveStart);
 
-
-
         Text::message('Saving to file in for loop...');
         $saveStart = microtime(true);
 
