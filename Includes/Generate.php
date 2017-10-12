@@ -64,7 +64,6 @@ class Generate
 
             if ($maxFileSize >= $maximumBytes) {
                 $maximumIteration = $tempMaxIteration;
-                Text::debug('Found right max iteration for loop');
                 break;
             }
         }
