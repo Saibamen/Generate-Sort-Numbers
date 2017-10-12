@@ -25,9 +25,12 @@ class File
      */
     public static function saveArrayToFile($array, $filename, $delimiter = ' ', $fileExtension = '.dat')
     {
+        //$fixedArray = \SplFixedArray::fromArray($array, true);
         $arrayCount = count($array);
+        $chunkedArray = array_chunk($array, 20);
+        $chunkedArrayCount = count($chunkedArray);
 
-        Text::message('Saving to file in foreach...');
+        Text::message('Saving to file...');
         $saveStart = microtime(true);
 
         $file = fopen($filename.$fileExtension, 'w');
@@ -48,26 +51,33 @@ class File
 
         Text::printTimeDuration($saveStart);
 
-        Text::message('Saving to file in for loop...');
+        Text::message('Saving to file from chunkedArray...');
+
         $saveStart = microtime(true);
+
+        $outputString = null;
 
         $file = fopen($filename.$fileExtension, 'w');
 
-        for ($i = 0; $i < $arrayCount; $i++) {
-            $outputString = $array[$i].$delimiter;
+        $i = 0;
+
+        foreach ($chunkedArray as $chunk) {
+            foreach ($chunk as $value) {
+                $outputString .= $value.$delimiter;
+            }
 
             // Remove last delimiter
-            if ($i === $arrayCount - 1) {
+            if (++$i === $chunkedArrayCount) {
                 $outputString = rtrim($outputString, $delimiter);
             }
 
             fwrite($file, $outputString);
+            $outputString = null;
         }
 
         fclose($file);
 
         Text::printTimeDuration($saveStart);
-
         Text::message('Output file '.$filename.$fileExtension.' saved with '.filesize($filename.$fileExtension).' bytes.');
     }
 
