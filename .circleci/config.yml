@@ -42,5 +42,5 @@ jobs:
       - run: "[ -e sort_test.dat ] && echo 'File sort_test.dat exists' || (echo 'File sort_test.dat not exists!!' && fake_command_to_stop_build)"
       - run: php sort -debug < tests/sort_10MB.txt
       - run: "[ -e sort_10MB.dat ] && echo 'File sort_10MB.dat exists' || (echo 'File sort_10MB.dat not exists!!' && fake_command_to_stop_build)"
-      - run: php sort -debug < tests/sort_256MB.txt
-      - run: "[ -e sort_256MB.dat ] && echo 'File sort_256MB.dat exists' || (echo 'File sort_256MB.dat not exists!!' && fake_command_to_stop_build)"
+      #- run: php sort -debug < tests/sort_256MB.txt
+      #- run: "[ -e sort_256MB.dat ] && echo 'File sort_256MB.dat exists' || (echo 'File sort_256MB.dat not exists!!' && fake_command_to_stop_build)"

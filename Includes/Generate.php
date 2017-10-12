@@ -78,8 +78,8 @@ class Generate
         $file = fopen($filename.$fileExtension, 'w');
 
         for ($i = 1; $i <= $maximumIteration; $i++) {
-            // Print progress and move cursor back to position 0
             if (!self::getTesting()) {
+                // Print progress and move cursor back to position 0
                 echo 'Progress: '.$i.'/'.$maximumIteration."\r";
             }
 
