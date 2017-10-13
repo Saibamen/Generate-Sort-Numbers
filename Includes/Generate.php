@@ -55,7 +55,6 @@ class Generate
         Text::debug('First maximum iteration: '.$maximumIteration);
 
         $findingStart = microtime(true);
-
         Text::message('Finding maximum iteration for loop...');
 
         for ($i = 0; ; $i++) {
@@ -64,11 +63,13 @@ class Generate
 
             if ($maxFileSize >= $maximumBytes) {
                 $maximumIteration = $tempMaxIteration;
+                unset($tempMaxIteration);
                 break;
             }
         }
 
         Text::printTimeDuration($findingStart);
+        unset($findingStart);
 
         Text::message('GENERATING...');
         Text::debug('Min: '.$min.' Max: '.$max.' Decimal places: '.$decimalPlaces.' Size: '.$maxFileSize."\nMaximum iteration: ".$maximumIteration."\n");
