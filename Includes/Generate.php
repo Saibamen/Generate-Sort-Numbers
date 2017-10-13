@@ -103,6 +103,49 @@ class Generate
 
         Text::printTimeDuration($generateStart);
         Text::message('Output file '.$filename.$fileExtension.' generated with '.filesize($filename.$fileExtension).' bytes.');
+
+        Text::message('GENERATING with two for loops...');
+
+        $generateStart = microtime(true);
+
+        $file = fopen($filename.'1'.$fileExtension, 'w');
+        $chunkSize = 20;
+        $maximumMainForIteration = ceil((int) ($maximumIteration / $chunkSize));
+        $outputString = null;
+        $progress = 1;
+
+        for ($i = 0; $i <= $maximumMainForIteration; $i++) {
+            for ($j = 1; $j <= $chunkSize; $j++, $progress++) {
+                if ($progress > $maximumIteration) {
+                    break;
+                }
+
+                if (!self::getTesting()) {
+                    // Print progress and move cursor back to position 0
+                    echo 'Progress: '.$progress.'/'.$maximumIteration."\r";
+                }
+
+                // Random number
+                $number = $min + $range * (mt_rand() / mt_getrandmax());
+                // Format with trailing zeros ie. 8.00
+                $number = number_format((float) $number, (int) $decimalPlaces, '.', '');
+
+                $outputString .= $number.$delimiter;
+            }
+
+            // Remove last delimiter
+            if ($progress > $maximumIteration) {
+                $outputString = rtrim($outputString, $delimiter);
+            }
+
+            fwrite($file, $outputString);
+            $outputString = null;
+        }
+
+        fclose($file);
+
+        Text::printTimeDuration($generateStart);
+        Text::message('Output file '.$filename.$fileExtension.' generated with '.filesize($filename.'1'.$fileExtension).' bytes.');
     }
 
     /**

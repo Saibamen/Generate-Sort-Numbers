@@ -27,7 +27,8 @@ class File
     {
         //$fixedArray = \SplFixedArray::fromArray($array, true);
         $arrayCount = count($array);
-        $chunkedArray = array_chunk($array, 20);
+        $chunkSize = 20;
+        $chunkedArray = array_chunk($array, $chunkSize);
         $chunkedArrayCount = count($chunkedArray);
 
         Text::message('Saving to file...');
