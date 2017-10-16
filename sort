@@ -30,22 +30,63 @@ require_once 'Includes/Generate.php';
 require_once 'Includes/Input.php';
 require_once 'Includes/File.php';
 
-// Check for console arguments
-if (count($argv) > 1) {
-    foreach ($argv as $arg) {
-        switch ($arg) {
-            case '-debug':
-                Text::message('Debug mode. Have fun!');
-                Text::setDebug(true);
-                break;
-        }
+// Console arguments
+$longOpts = array(
+    'input:',
+    'output:',
+    'ext:',
+    'debug'
+);
+
+$args = getopt(null, $longOpts);
+var_dump($args);
+
+// Extension
+$fileExtension = '.dat';
+
+if (isset($args['ext'])) {
+    $fileExtension = $args['ext'];
+}
+
+// Debug mode
+if (isset($args['debug'])) {
+    Text::message('Debug mode. Have fun!');
+    Text::setDebug(true);
+}
+
+// Input
+if (isset($args['input'])) {
+    if (file_exists($args['input'].$fileExtension)) {
+        $inputFilename = $args['input'];
+    } else {
+        Text::message('Input file does not exist.');
     }
 }
 
-$inputFilename = Input::getExistsFilename('Type input filename to read (without extension)');
-$outputFilename = Input::getFilename('Type output filename (without extension)', 'sorted');
+// Output
+if (isset($args['output'])) {
+    if (Input::isFilenameWrong($args['output'])) {
+        Text::message('Wrong output filename.');
+    } else {
+        $outputFilename = $args['output'];
+    }
+}
 
-$array = File::getArrayFromFile($inputFilename);
+unset($args);
+
+// Collect User input
+if (!isset($inputFilename)) {
+    $inputFilename = Input::getExistsFilename('Type input filename to read (without extension)', 'output', $fileExtension);
+}
+
+if (!isset($outputFilename)) {
+    $outputFilename = Input::getFilename('Type output filename (without extension)', 'sorted', $fileExtension);
+}
+
+File::createMissingDirectory($outputFilename);
+File::checkIfFileExistsAndDeleteContent($outputFilename, $fileExtension);
+
+$array = File::getArrayFromFile($inputFilename, $fileExtension);
 Text::debug('Array elements: '.count($array));
 
 Text::message('SORTING...');
@@ -55,4 +96,4 @@ sort($array);
 
 Text::printTimeDuration($sortStart);
 
-File::saveArrayToFile($array, $outputFilename);
+File::saveArrayToFile($array, $outputFilename, ' ', $fileExtension);

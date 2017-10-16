@@ -74,6 +74,8 @@ class Input
      * @param string $default Default filename for empty input. Default is 'output'
      *
      * @return string Inserted filename
+     *
+     * @see Input::isFilenameWrong()
      */
     public static function getFilename($message, $default = 'output')
     {
@@ -82,22 +84,8 @@ class Input
         do {
             $input = trim(fgets(/** @scrutinizer ignore-type */ STDIN));
 
-            /*
-             * Invalid characters in files:
-             * (Windows)  \/:*?"<>|
-             * (Linux)    /
-             */
-
-            $lastCharacter = substr($input, -1);
-
-            // Only last character because / and \ are for folders
-            $isInputWrong = $lastCharacter === '/' || $lastCharacter === '\\';
-
-            // Running under Windows?
-            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-                // https://regex101.com/r/wR5d0J/2/
-                $isInputWrong = $isInputWrong || preg_match('/[:*?"<>|]/', $input);
-            }
+            // Check for wrong filename based on OS
+            $isInputWrong = self::isFilenameWrong($input);
 
             if (is_null($input) || empty($input)) {
                 Text::debug('Using default input: '.$default);
@@ -118,7 +106,7 @@ class Input
      *
      * @return array
      */
-    protected static function getBytesFromString($input, $notation = 1024)
+    public static function getBytesFromString($input, $notation = 1024)
     {
         $error = true;
         $bytes = 0;
@@ -202,6 +190,34 @@ class Input
 
         // Fix missing return statement warning. Return true...
         return true;
+    }
+
+    /**
+     * Check for wrong filename based on OS.
+     *
+     * @param string $input User filename input
+     *
+     * @return bool Is filename wrong?
+     */
+    public static function isFilenameWrong($input) {
+        /*
+         * Invalid characters in files:
+         * (Windows)  \/:*?"<>|
+         * (Linux)    /
+         */
+
+        $lastCharacter = substr($input, -1);
+
+        // Only last character because / and \ are for folders
+        $isInputWrong = $lastCharacter === '/' || $lastCharacter === '\\';
+
+        // Running under Windows?
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            // https://regex101.com/r/wR5d0J/2/
+            $isInputWrong = $isInputWrong || preg_match('/[:*?"<>|]/', $input);
+        }
+
+        return $isInputWrong;
     }
 
     /**
