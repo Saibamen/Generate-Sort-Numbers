@@ -199,7 +199,8 @@ class Input
      *
      * @return bool Is filename wrong?
      */
-    public static function isFilenameWrong($input) {
+    public static function isFilenameWrong($input)
+    {
         /*
          * Invalid characters in files:
          * (Windows)  \/:*?"<>|

@@ -38,7 +38,7 @@ $longOpts = array(
     'output:',
     'ext:',
     'debug',
-    'testing'
+    'testing',
 );
 
 $args = getopt(null, $longOpts);
@@ -111,7 +111,6 @@ if (isset($args['output'])) {
         $filename = $args['output'];
     }
 }
-
 
 unset($args);
 
