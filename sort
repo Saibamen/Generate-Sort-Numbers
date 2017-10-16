@@ -35,7 +35,7 @@ $longOpts = array(
     'input:',
     'output:',
     'ext:',
-    'debug'
+    'debug',
 );
 
 $args = getopt(null, $longOpts);
