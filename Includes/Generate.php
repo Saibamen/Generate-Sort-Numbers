@@ -51,18 +51,18 @@ class Generate
         File::checkIfFileExistsAndDeleteContent($filename, $fileExtension);
 
         // Maximum iteration without delimiter
-        $maximumIteration = (int) ($maxFileSize / $minMaxNumberSize['max']);
-        Text::debug('First maximum iteration: '.$maximumIteration);
+        $maxIteration = (int) ($maxFileSize / $minMaxNumberSize['max']);
+        Text::debug('First maximum iteration: '.$maxIteration);
 
         $findingStart = microtime(true);
         Text::message('Finding maximum iteration for loop...');
 
         for ($i = 0; ; $i++) {
-            $tempMaxIteration = $maximumIteration - $i;
+            $tempMaxIteration = $maxIteration - $i;
             $maximumBytes = ($minMaxNumberSize['max'] * $tempMaxIteration) + $tempMaxIteration - strlen($delimiter);
 
             if ($maxFileSize >= $maximumBytes) {
-                $maximumIteration = $tempMaxIteration;
+                $maxIteration = $tempMaxIteration;
                 unset($tempMaxIteration);
                 break;
             }
@@ -72,25 +72,25 @@ class Generate
         unset($findingStart);
 
         Text::message('GENERATING...');
-        Text::debug('Min: '.$min.' Max: '.$max.' Decimal places: '.$decimalPlaces.' Size: '.$maxFileSize."\nMaximum iteration: ".$maximumIteration."\n");
+        Text::debug('Min: '.$min.' Max: '.$max.' Decimal places: '.$decimalPlaces.' Size: '.$maxFileSize."\nMaximum iteration: ".$maxIteration."\n");
 
         $generateStart = microtime(true);
 
         $file = fopen($filename.$fileExtension, 'w');
         $chunkSize = 20;
-        $maximumMainForIteration = ceil((int) ($maximumIteration / $chunkSize));
+        $maxMainIteration = ceil((int) ($maxIteration / $chunkSize));
         $outputString = null;
         $progress = 1;
 
-        for ($i = 0; $i <= $maximumMainForIteration; $i++) {
+        for ($i = 0; $i <= $maxMainIteration; $i++) {
             for ($j = 1; $j <= $chunkSize; $j++, $progress++) {
-                if ($progress > $maximumIteration) {
+                if ($progress > $maxIteration) {
                     break;
                 }
 
                 if (!self::getTesting()) {
                     // Print progress and move cursor back to position 0
-                    echo 'Progress: '.$progress.'/'.$maximumIteration."\r";
+                    echo 'Progress: '.$progress.'/'.$maxIteration."\r";
                 }
 
                 // Random number
@@ -102,7 +102,7 @@ class Generate
             }
 
             // Remove last delimiter
-            if ($progress > $maximumIteration) {
+            if ($progress > $maxIteration) {
                 $outputString = rtrim($outputString, $delimiter);
             }
 
