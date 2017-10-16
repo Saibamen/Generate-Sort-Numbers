@@ -19,40 +19,36 @@ matrix:
     - php: 5.3
       dist: precise
 
-before_script:
-  # Additional PHP config for increasing memory limit
-  # See http://blog.simplytestable.com/setting-the-php-memory-limit-for-travis-ci/
-  - phpenv config-add travis.php.ini
-
 script:
   ### Generate
-  - php generate -debug -testing < tests/generate_simple.txt
+  - php generate --debug --testing < tests/generate_simple.txt
   - "[ -e test.dat ] && echo 'File test.dat exists' || (echo 'File test.dat not exists!!' && fake_command_to_stop_build)"
-  - php generate -debug -testing < tests/generate_invalid_filename.txt
+  - php generate --debug --testing < tests/generate_invalid_filename.txt
   - "[ -e test/valid_filename.dat ] && echo 'File test/valid_filename.dat exists' || (echo 'File test/valid_filename.dat not exists!!' && fake_command_to_stop_build)"
-  - php generate -debug -testing < tests/generate_directory.txt
+  - php generate --debug --testing < tests/generate_directory.txt
   - "[ -e test/test.dat ] && echo 'File test/test.dat exists' || (echo 'File test/test.dat not exists!!' && fake_command_to_stop_build)"
-  - php generate -debug -testing < tests/generate_default_numbers.txt
+  - php generate --debug --testing < tests/generate_default_numbers.txt
   - "[ -e default_numbers.dat ] && echo 'File default_numbers.dat exists' || (echo 'File default_numbers.dat not exists!!' && fake_command_to_stop_build)"
 
   # Test for positive confirmation
-  - php generate -debug -testing < tests/generate_simple.txt
-  - php generate -debug -testing < tests/generate_negative_confirmation.txt
+  - php generate --debug --testing < tests/generate_simple.txt
+  - php generate --debug --testing < tests/generate_negative_confirmation.txt
 
   # Generating large files
-  - php generate -debug -testing < tests/generate_10MB_file.txt
+  - php generate --debug --testing < tests/generate_10MB_file.txt
   - "[ -e 10MB.dat ] && echo 'File 10MB.dat exists' || (echo 'File 10MB.dat not exists!!' && fake_command_to_stop_build)"
-  - php generate -debug -testing < tests/generate_256MB_file.txt
+  - travis_wait php generate --min 5 --max 10 --decimal 6 --size 256MB --output 256MB --debug --testing
   - "[ -e 256MB.dat ] && echo 'File 256MB.dat exists' || (echo 'File 256MB.dat not exists!!' && fake_command_to_stop_build)"
-  # For now only nightly PHP can handle this with default memory limit
-  - if [[ "$TRAVIS_PHP_VERSION" == "nightly" ]]; then php generate -debug -testing < tests/generate_1GB_file.txt; fi
-  - if [[ "$TRAVIS_PHP_VERSION" == "nightly" ]]; then [ -e 1GB.dat ] && echo 'File 1GB.dat exists' || (echo 'File 1GB.dat not exists!!' && fake_command_to_stop_build); fi
+  - travis_wait 30 php generate --min 5 --max 10 --decimal 6 --size 1GB --output 1GB --debug --testing
+  - "[ -e 1GB.dat ] && echo 'File 1GB.dat exists' || (echo 'File 1GB.dat not exists!!' && fake_command_to_stop_build)"
 
   ### Sort
-  - php sort -debug < tests/sort_simple.txt
+  - php sort --debug < tests/sort_simple.txt
   - "[ -e sort_test.dat ] && echo 'File sort_test.dat exists' || (echo 'File sort_test.dat not exists!!' && fake_command_to_stop_build)"
-  - php sort -debug < tests/sort_10MB.txt
+  - php sort --debug < tests/sort_10MB.txt
   - "[ -e sort_10MB.dat ] && echo 'File sort_10MB.dat exists' || (echo 'File sort_10MB.dat not exists!!' && fake_command_to_stop_build)"
+  #- php sort --debug < tests/sort_256MB.txt
+  #- "[ -e sort_256MB.dat ] && echo 'File sort_256MB.dat exists' || (echo 'File sort_256MB.dat not exists!!' && fake_command_to_stop_build)"
 
 after_script:
   - rm *.dat

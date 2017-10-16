@@ -7,11 +7,6 @@
  *
  * @link    https://github.com/Saibamen/Generate-Sort-Numbers
  */
-/**
- * Functions for 'Generate' script.
- *
- * @author  Adam "Saibamen" Stachowicz <saibamenppl@gmail.com>
- */
 
 namespace Includes;
 
@@ -56,52 +51,63 @@ class Generate
         File::checkIfFileExistsAndDeleteContent($filename, $fileExtension);
 
         // Maximum iteration without delimiter
-        $maximumIteration = (int) ($maxFileSize / $minMaxNumberSize['max']);
-        Text::debug('First maximum iteration: '.$maximumIteration);
+        $maxIteration = (int) ($maxFileSize / $minMaxNumberSize['max']);
+        Text::debug('First maximum iteration: '.$maxIteration);
 
         $findingStart = microtime(true);
-
         Text::message('Finding maximum iteration for loop...');
 
         for ($i = 0; ; $i++) {
-            $tempMaxIteration = $maximumIteration - $i;
+            $tempMaxIteration = $maxIteration - $i;
             $maximumBytes = ($minMaxNumberSize['max'] * $tempMaxIteration) + $tempMaxIteration - strlen($delimiter);
 
             if ($maxFileSize >= $maximumBytes) {
-                $maximumIteration = $tempMaxIteration;
-                Text::debug('Found right max iteration for loop');
+                $maxIteration = $tempMaxIteration;
+                unset($tempMaxIteration);
                 break;
             }
         }
 
         Text::printTimeDuration($findingStart);
+        unset($findingStart);
 
         Text::message('GENERATING...');
-        Text::debug('Min: '.$min.' Max: '.$max.' Decimal places: '.$decimalPlaces.' Size: '.$maxFileSize."\nMaximum iteration: ".$maximumIteration."\n");
+        Text::debug('Min: '.$min.' Max: '.$max.' Decimal places: '.$decimalPlaces.' Size: '.$maxFileSize."\nMaximum iteration: ".$maxIteration."\n");
 
         $generateStart = microtime(true);
 
         $file = fopen($filename.$fileExtension, 'w');
+        $chunkSize = 20;
+        $maxMainIteration = ceil((int) ($maxIteration / $chunkSize));
+        $outputString = null;
+        $progress = 1;
 
-        for ($i = 1; $i <= $maximumIteration; $i++) {
-            // Print progress and move cursor back to position 0
-            if (!self::getTesting()) {
-                echo 'Progress: '.$i.'/'.$maximumIteration."\r";
+        for ($i = 0; $i <= $maxMainIteration; $i++) {
+            for ($j = 1; $j <= $chunkSize; $j++, $progress++) {
+                if ($progress > $maxIteration) {
+                    break;
+                }
+
+                if (!self::getTesting()) {
+                    // Print progress and move cursor back to position 0
+                    echo 'Progress: '.$progress.'/'.$maxIteration."\r";
+                }
+
+                // Random number
+                $number = $min + $range * (mt_rand() / mt_getrandmax());
+                // Format with trailing zeros ie. 8.00
+                $number = number_format((float) $number, (int) $decimalPlaces, '.', '');
+
+                $outputString .= $number.$delimiter;
             }
 
-            // Random number
-            $number = $min + $range * (mt_rand() / mt_getrandmax());
-            // Format with trailing zeros ie. 8.00
-            $number = number_format((float) $number, (int) $decimalPlaces, '.', '');
-
-            $outputString = $number.$delimiter;
-
             // Remove last delimiter
-            if ($i === $maximumIteration) {
+            if ($progress > $maxIteration) {
                 $outputString = rtrim($outputString, $delimiter);
             }
 
             fwrite($file, $outputString);
+            $outputString = null;
         }
 
         fclose($file);

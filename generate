@@ -22,31 +22,102 @@ if (php_sapi_name() !== 'cli') {
     exit('This is console app. Please run it in console (CLI)!');
 }
 
-// Increase the memory limit
-ini_set('memory_limit', '1024M');
-
 require_once 'Includes/Generate.php';
 require_once 'Includes/Input.php';
 require_once 'Includes/File.php';
 
-// Check for console arguments
-if (count($argv) > 1) {
-    foreach ($argv as $arg) {
-        switch ($arg) {
-            case '-debug':
-                Text::message('Debug mode. Have fun!');
-                Text::setDebug(true);
-                break;
-            case '-testing':
-                Text::message('Testing mode');
-                Generate::setTesting(true);
-                break;
-        }
+// Console arguments
+$longOpts = array(
+    'min:',
+    'max:',
+    'decimal:',
+    'size:',
+    'output:',
+    'ext:',
+    'debug',
+    'testing',
+);
+
+$args = getopt(null, $longOpts);
+
+// Extension
+$fileExtension = '.dat';
+
+if (isset($args['ext'])) {
+    $fileExtension = $args['ext'];
+}
+
+// Debug mode
+if (isset($args['debug'])) {
+    Text::message('Debug mode. Have fun!');
+    Text::setDebug(true);
+}
+
+// Testing mode
+if (isset($args['testing'])) {
+    Text::message('Testing mode');
+    Generate::setTesting(true);
+}
+
+// Min
+if (isset($args['min'])) {
+    if (!is_numeric($args['min'])) {
+        Text::message('Wrong minimum allowed number.');
+    } else {
+        $min = (float) $args['min'];
     }
 }
 
-$min = Input::getNumber('Type minimum allowed number');
-$max = Input::getNumber('Type maximum allowed number', 10);
+// Max
+if (isset($args['max'])) {
+    if (!is_numeric($args['max'])) {
+        Text::message('Wrong maximum allowed number.');
+    } else {
+        $max = (float) $args['max'];
+    }
+}
+
+// Decimal places
+if (isset($args['decimal'])) {
+    if (!is_numeric($args['decimal'])) {
+        Text::message('Wrong decimal places number.');
+    } else {
+        $decimalPlaces = (float) $args['decimal'];
+    }
+}
+
+// File size
+if (isset($args['size'])) {
+    $checkInput = Input::getBytesFromString($args['size']);
+
+    if ($checkInput['error']) {
+        Text::message('Wrong file size.');
+    } else {
+        $fileSize = $checkInput['bytes'];
+    }
+
+    unset($checkInput);
+}
+
+// Output
+if (isset($args['output'])) {
+    if (Input::isFilenameWrong($args['output'])) {
+        Text::message('Wrong output filename.');
+    } else {
+        $filename = $args['output'];
+    }
+}
+
+unset($args);
+
+// Collect User input
+if (!isset($min)) {
+    $min = Input::getNumber('Type minimum allowed number');
+}
+
+if (!isset($max)) {
+    $max = Input::getNumber('Type maximum allowed number', 10);
+}
 
 // Switch min and max if min > max
 $minMax = Generate::checkSwitchMinMax($min, $max);
@@ -54,10 +125,17 @@ $minMax = Generate::checkSwitchMinMax($min, $max);
 $min = $minMax['min'];
 $max = $minMax['max'];
 
-$decimalPlaces = Input::getNumber('Type number of decimal places');
+if (!isset($decimalPlaces)) {
+    $decimalPlaces = Input::getNumber('Type number of decimal places');
+}
 
-$fileSize = Input::getFileSize("Type maximum file size\neg. `5B`, `5KB`, `5MB`, `5GB`");
+if (!isset($fileSize)) {
+    $fileSize = Input::getFileSize("Type maximum file size\neg. `5B`, `5KB`, `5MB`, `5GB`");
+}
 
-$filename = Input::getFilename('Type output filename (without extension)');
+if (!isset($filename)) {
+    $filename = Input::getFilename('Type output filename (without extension)');
+}
 
+// Generate and save to file
 Generate::generateAndSaveRandomNumbers($min, $max, $decimalPlaces, $fileSize, $filename);

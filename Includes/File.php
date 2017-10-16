@@ -25,24 +25,30 @@ class File
      */
     public static function saveArrayToFile($array, $filename, $delimiter = ' ', $fileExtension = '.dat')
     {
-        $arrayCount = count($array);
+        $chunkSize = 20;
+        $chunkedArray = array_chunk($array, $chunkSize);
+        $chunkedArrayCount = count($chunkedArray);
 
         Text::message('Saving to file...');
 
         $saveStart = microtime(true);
 
         $file = fopen($filename.$fileExtension, 'w');
+        $outputString = null;
+        $currentArrayItem = 0;
 
-        $i = 0;
-        foreach ($array as $value) {
-            $outputString = $value.$delimiter;
+        foreach ($chunkedArray as $chunk) {
+            foreach ($chunk as $value) {
+                $outputString .= $value.$delimiter;
+            }
 
             // Remove last delimiter
-            if (++$i === $arrayCount) {
+            if (++$currentArrayItem === $chunkedArrayCount) {
                 $outputString = rtrim($outputString, $delimiter);
             }
 
             fwrite($file, $outputString);
+            $outputString = null;
         }
 
         fclose($file);

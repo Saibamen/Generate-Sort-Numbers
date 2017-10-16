@@ -22,6 +22,7 @@ engines:
 ratings:
   paths:
   - "generate"
+  - "sort"
   - "**.css"
   - "**.inc"
   - "**.js"
