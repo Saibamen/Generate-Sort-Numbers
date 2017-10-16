@@ -29,7 +29,7 @@ php generate
 If you want see more information, type:
 
 ```
-php generate -debug
+php generate --debug
 ```
 
 ### Sorting numbers
@@ -43,7 +43,7 @@ php sort
 If you want see more information, type:
 
 ```
-php sort -debug
+php sort --debug
 ```
 
 ### Generating documentation

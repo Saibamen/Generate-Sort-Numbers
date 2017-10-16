@@ -22,9 +22,6 @@ if (php_sapi_name() !== 'cli') {
     exit('This is console app. Please run it in console (CLI)!');
 }
 
-// Increase the memory limit
-ini_set('memory_limit', '1024M');
-
 require_once 'Includes/Generate.php';
 require_once 'Includes/Input.php';
 require_once 'Includes/File.php';

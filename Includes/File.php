@@ -31,34 +31,11 @@ class File
         $chunkedArrayCount = count($chunkedArray);
 
         Text::message('Saving to file...');
+
         $saveStart = microtime(true);
 
         $file = fopen($filename.$fileExtension, 'w');
-
-        $i = 0;
-        foreach ($array as $value) {
-            $outputString = $value.$delimiter;
-
-            // Remove last delimiter
-            if (++$i === $arrayCount) {
-                $outputString = rtrim($outputString, $delimiter);
-            }
-
-            fwrite($file, $outputString);
-        }
-
-        fclose($file);
-
-        Text::printTimeDuration($saveStart);
-
-        Text::message('Saving to file from chunkedArray...');
-
-        $saveStart = microtime(true);
-
         $outputString = null;
-
-        $file = fopen($filename.$fileExtension, 'w');
-
         $currentArrayItem = 0;
 
         foreach ($chunkedArray as $chunk) {
