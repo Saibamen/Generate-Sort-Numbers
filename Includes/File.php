@@ -25,7 +25,6 @@ class File
      */
     public static function saveArrayToFile($array, $filename, $delimiter = ' ', $fileExtension = '.dat')
     {
-        //$fixedArray = \SplFixedArray::fromArray($array, true);
         $arrayCount = count($array);
         $chunkSize = 20;
         $chunkedArray = array_chunk($array, $chunkSize);
