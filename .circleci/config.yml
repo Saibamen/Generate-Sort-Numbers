@@ -34,7 +34,9 @@ jobs:
       # Generating large files
       - run: php generate --debug --testing < tests/generate_10MB_file.txt
       - run: "[ -e 10MB.dat ] && echo 'File 10MB.dat exists' || (echo 'File 10MB.dat not exists!!' && fake_command_to_stop_build)"
-      - run: php generate --debug --testing < tests/generate_1GB_file.txt
+      - run: php generate --min 5 --max 10 --decimal 6 --size 256MB --output 256MB --debug --testing
+      - run: "[ -e 256MB.dat ] && echo 'File 256MB.dat exists' || (echo 'File 256MB.dat not exists!!' && fake_command_to_stop_build)"
+      - run: php generate --min 5 --max 10 --decimal 6 --size 1GB --output 1GB --debug --testing
       - run: "[ -e 1GB.dat ] && echo 'File 1GB.dat exists' || (echo 'File 1GB.dat not exists!!' && fake_command_to_stop_build)"
 
       ### Sort

@@ -39,7 +39,6 @@ $longOpts = array(
 );
 
 $args = getopt(null, $longOpts);
-var_dump($args);
 
 // Extension
 $fileExtension = '.dat';

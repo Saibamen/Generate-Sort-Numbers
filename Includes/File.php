@@ -59,7 +59,7 @@ class File
 
         $file = fopen($filename.$fileExtension, 'w');
 
-        $i = 0;
+        $currentArrayItem = 0;
 
         foreach ($chunkedArray as $chunk) {
             foreach ($chunk as $value) {
@@ -67,7 +67,7 @@ class File
             }
 
             // Remove last delimiter
-            if (++$i === $chunkedArrayCount) {
+            if (++$currentArrayItem === $chunkedArrayCount) {
                 $outputString = rtrim($outputString, $delimiter);
             }
 
