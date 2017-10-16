@@ -44,7 +44,7 @@ script:
   - "[ -e 10MB.dat ] && echo 'File 10MB.dat exists' || (echo 'File 10MB.dat not exists!!' && fake_command_to_stop_build)"
   - travis_wait php generate --min 5 --max 10 --decimal 6 --size 256MB --output 256MB --debug --testing
   - "[ -e 256MB.dat ] && echo 'File 256MB.dat exists' || (echo 'File 256MB.dat not exists!!' && fake_command_to_stop_build)"
-  - travis_wait 30 php generate --min 5 --max 10 --decimal 6 --size 1GB --output 1GB --debug --testing
+  - travis_wait 70 php generate --min 5 --max 10 --decimal 6 --size 1GB --output 1GB --debug --testing
   - "[ -e 1GB.dat ] && echo 'File 1GB.dat exists' || (echo 'File 1GB.dat not exists!!' && fake_command_to_stop_build)"
 
   ### Sort
