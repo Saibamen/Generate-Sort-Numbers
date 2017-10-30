@@ -35,6 +35,7 @@ $longOpts = array(
     'input:',
     'output:',
     'ext:',
+    'delimiter:',
     'debug',
 );
 
@@ -44,7 +45,23 @@ $args = getopt(null, $longOpts);
 $fileExtension = '.dat';
 
 if (isset($args['ext'])) {
-    $fileExtension = $args['ext'];
+    // preg match for \ and /
+    if (Input::isFilenameWrong($args['ext']) || preg_match('/[\/\\\\]/', $args['ext'])) {
+        Text::message('Wrong file extension.');
+    } else {
+        $fileExtension = $args['ext'];
+    }
+}
+
+// Delimiter
+$delimiter = ' ';
+
+if (isset($args['delimiter'])) {
+    if (preg_match('/[0-9-.]/', $args['delimiter'])) {
+        Text::message('Wrong delimiter.');
+    } else {
+        $delimiter = $args['delimiter'];
+    }
 }
 
 // Debug mode
@@ -85,7 +102,7 @@ if (!isset($outputFilename)) {
 File::createMissingDirectory($outputFilename);
 File::checkIfFileExistsAndDeleteContent($outputFilename, $fileExtension);
 
-$array = File::getArrayFromFile($inputFilename, $fileExtension);
+$array = File::getArrayFromFile($inputFilename, $fileExtension, $delimiter);
 Text::debug('Array elements: '.count($array));
 
 Text::message('SORTING...');
@@ -95,4 +112,4 @@ sort($array);
 
 Text::printTimeDuration($sortStart);
 
-File::saveArrayToFile($array, $outputFilename, ' ', $fileExtension);
+File::saveArrayToFile($array, $outputFilename, $fileExtension, $delimiter);
