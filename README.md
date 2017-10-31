@@ -36,6 +36,7 @@ Options:
 * **--ext:** file extension
 * **--delimiter:** delimiter for numbers
 * **--debug:** prints dev informations
+* **--testing:** doesn't print progress when generating
 
 ### Sorting numbers
 
