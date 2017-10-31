@@ -50,7 +50,7 @@ Options:
 
 * **--input:** input filename (without extension)
 * **--output:** output filename (without extension)
-* **--ext:** file extension
+* **--ext:** file extension for input and output. Default: '.dat'
 * **--delimiter:** delimiter for numbers. Default: ' '
 * **--debug:** prints dev informations
 
