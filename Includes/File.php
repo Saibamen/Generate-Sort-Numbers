@@ -84,10 +84,9 @@ class File
      */
     public static function createMissingDirectory($filename)
     {
-        // TODO: Create few dir ie. bla/bla2/bla3/fff.dat
         if (!is_dir(dirname($filename))) {
             Text::debug('Creating missing directory: '.dirname($filename));
-            mkdir(dirname($filename));
+            mkdir(dirname($filename), 0777, true);
         }
     }
 
