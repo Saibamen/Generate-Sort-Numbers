@@ -30,14 +30,14 @@ class Generate
      * @param int|float    $decimalPlaces Number of decimal places
      * @param int          $maxFileSize   Maximum file size in bytes
      * @param string       $filename      Output filename without extension
-     * @param string|mixed $delimiter     Delimiter. Default is ' '
      * @param string       $fileExtension File extension. Default is '.dat'
+     * @param string|mixed $delimiter     Delimiter. Default is ' '
      *
      * @see Generate::getMinMaxNumberSize()
      * @see File::createMissingDirectory()
      * @see File::checkIfFileExists()
      */
-    public static function generateAndSaveRandomNumbers($min, $max, $decimalPlaces, $maxFileSize, $filename, $delimiter = ' ', $fileExtension = '.dat')
+    public static function generateAndSaveRandomNumbers($min, $max, $decimalPlaces, $maxFileSize, $filename, $fileExtension = '.dat', $delimiter = ' ')
     {
         $range = $max - $min;
 

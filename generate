@@ -34,6 +34,7 @@ $longOpts = array(
     'size:',
     'output:',
     'ext:',
+    'delimiter:',
     'debug',
     'testing',
 );
@@ -44,7 +45,23 @@ $args = getopt(null, $longOpts);
 $fileExtension = '.dat';
 
 if (isset($args['ext'])) {
-    $fileExtension = $args['ext'];
+    // preg match for \ and /
+    if (Input::isFilenameWrong($args['ext']) || preg_match('/[\/\\\\]/', $args['ext'])) {
+        Text::message('Wrong file extension.');
+    } else {
+        $fileExtension = $args['ext'];
+    }
+}
+
+// Delimiter
+$delimiter = ' ';
+
+if (isset($args['delimiter'])) {
+    if (preg_match('/[0-9-.]/', $args['delimiter'])) {
+        Text::message('Wrong delimiter.');
+    } else {
+        $delimiter = $args['delimiter'];
+    }
 }
 
 // Debug mode
@@ -138,4 +155,4 @@ if (!isset($filename)) {
 }
 
 // Generate and save to file
-Generate::generateAndSaveRandomNumbers($min, $max, $decimalPlaces, $fileSize, $filename);
+Generate::generateAndSaveRandomNumbers($min, $max, $decimalPlaces, $fileSize, $filename, $fileExtension, $delimiter);

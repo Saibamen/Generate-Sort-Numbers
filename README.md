@@ -26,11 +26,16 @@ Run generate script and follow instructions:
 php generate
 ```
 
-If you want see more information, type:
+Options:
 
-```
-php generate --debug
-```
+* **--min:** minimum allowed number
+* **--max:** maximum allowed number
+* **--decimal:** number of decimal places
+* **--size:** maximum file size eg. 5B, 5KB, 5MB, 5GB
+* **--output:** output filename (without extension)
+* **--ext:** file extension
+* **--delimiter:** delimiter for numbers
+* **--debug:** prints dev informations
 
 ### Sorting numbers
 
@@ -40,11 +45,13 @@ Run sort script and follow instructions:
 php sort
 ```
 
-If you want see more information, type:
+Options:
 
-```
-php sort --debug
-```
+* **--input:** input filename (without extension)
+* **--output:** output filename (without extension)
+* **--ext:** file extension
+* **--delimiter:** delimiter for numbers
+* **--debug:** prints dev informations
 
 ### Generating documentation
 
