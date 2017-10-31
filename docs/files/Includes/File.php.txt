@@ -20,10 +20,10 @@ class File
      *
      * @param array        $array         Array to sort
      * @param string       $filename      Filename without extension
-     * @param string|mixed $delimiter     Delimiter. Default is ' '
      * @param string       $fileExtension File extension. Default is '.dat'
+     * @param string|mixed $delimiter     Delimiter. Default is ' '
      */
-    public static function saveArrayToFile($array, $filename, $delimiter = ' ', $fileExtension = '.dat')
+    public static function saveArrayToFile($array, $filename, $fileExtension = '.dat', $delimiter = ' ')
     {
         $chunkSize = 20;
         $chunkedArray = array_chunk($array, $chunkSize);
@@ -84,6 +84,7 @@ class File
      */
     public static function createMissingDirectory($filename)
     {
+        // TODO: Create few dir ie. bla/bla2/bla3/fff.dat
         if (!is_dir(dirname($filename))) {
             Text::debug('Creating missing directory: '.dirname($filename));
             mkdir(dirname($filename));
