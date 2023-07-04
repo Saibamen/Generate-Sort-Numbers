@@ -7,7 +7,7 @@
 
 # Generate and sort numbers in PHP
 
-PHP console app for [Fingo](http://www.fingo.pl/).
+PHP console app for [FINGO](https://www.fingo.net/).
 
 Documentation for programmers: [here](https://saibamen.github.io/Generate-Sort-Numbers/)
 
@@ -66,11 +66,13 @@ composer update
 Generate documentation:
 
 Under Linux / MacOSX:
+
 ```
 vendor/bin/phpdoc -d ./ -f generate -f sort -t ./docs --ignore "vendor/"
 ```
 
 Under Windows:
+
 ```
 vendor\bin\phpdoc.bat -d ./ -f generate -f sort -t ./docs --ignore "vendor/"
 ```
